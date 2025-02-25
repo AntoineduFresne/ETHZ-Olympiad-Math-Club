@@ -23,7 +23,7 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-@app.route('/')
+@app.route('/templates')
 def index():
     return render_template('index.html')
 
