@@ -1,1 +1,0 @@
-# ETHZ-Olympiad-Math-Club
