@@ -1,63 +1,37 @@
-root {
-    --math-font: 'Fira Math', serif;
-    --text-font: 'Fira Sans', sans-serif;
-}
-
 body {
-    font-family: var(--text-font);
-    line-height: 1.6;
+    font-family: 'Fira Sans', sans-serif;
 }
 
-.math {
-    font-family: var(--math-font);
-}
-
-.card {
-    transition: transform 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.navbar-brand {
-    font-weight: bold;
-}
-
-.display-4 {
+h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
 
-.badge {
-    font-size: 0.8rem;
-    padding: 0.5em 0.7em;
+.math {
+    font-family: 'Fira Math', serif;
+}
+
+.navbar-brand {
+    font-weight: 700;
+}
+
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #343a40;
+    color: white;
 }
 
 footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: var(--bs-dark);
+    margin-top: 50px;
 }
 
-main {
-    margin-bottom: 100px;
+.list-group-item a {
+    text-decoration: none;
 }
 
-.card-title {
-    color: var(--bs-primary);
+.list-group-item a:hover {
+    text-decoration: underline;
 }
-
-/* Custom styling for mathematical expressions */
-.katex {
-    font-size: 1.1em;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .display-4 {
-        font-size: 2rem;
-    }
-}
-
-MathMastery - Replit
