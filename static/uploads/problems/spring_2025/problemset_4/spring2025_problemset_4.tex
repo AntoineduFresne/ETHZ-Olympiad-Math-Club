@@ -1,0 +1,116 @@
+\documentclass[11pt, a4paper, oneside]{article}
+
+% ===== Page Layout =====
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{microtype}  % Improved text justification
+
+% ===== Fonts & Encoding =====
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+
+% ===== Math Packages =====
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{tensor}
+\usepackage{mathtools}
+
+% ===== Graphics & Diagrams =====
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{pst-node}
+
+% ===== Bibliography =====
+\usepackage{biblatex}
+%\addbibresource{references.bib}  % Uncomment and add your .bib file
+
+% ===== Tables =====
+\usepackage{makecell}
+
+% ===== Colors =====
+\usepackage{xcolor}
+\definecolor{linkcolour}{rgb}{0.5,0,0}  % Dark red color for links
+
+% ===== Hyperlinks =====
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    breaklinks,
+    urlcolor=linkcolour, 
+    linkcolor=linkcolour,
+    citecolor=linkcolour
+}
+
+% ===== Custom Commands =====
+\newcommand{\problem}[1][]{\section{#1} \hfill \par}
+\newcommand{\answer}{\subsection*{Answer:}\hfill \par}
+
+% ===== Theorem Environments =====
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+% ===== Text Highlighting =====
+\usepackage{soul}
+\newcommand\ba[1]{\setbox0=\hbox{$#1$}%
+\rlap{\raisebox{.45\ht0}{\textcolor{linkcolour}{\rule{\wd0}{1pt}}}}#1} 
+\def\bc#1{\textcolor{linkcolour}{BC note: {#1}}}
+\def\b#1{\textcolor{linkcolour}{{#1}}}
+
+% ===== Comment Environment =====
+\usepackage{comment}
+\begin{comment}
+Useful LaTeX fonts:
+\usepackage{mathptmx}
+\usepackage{txfonts}
+\usepackage{pxfonts}
+\usepackage{mathpazo}
+\usepackage{mathpple}
+\usepackage{kmath,kerkis}
+\usepackage{kurier}
+\usepackage{arev}
+\usepackage{euler}
+\usepackage{eulervm}
+\end{comment}
+
+\title{Problem Set Week 4}
+\author{ETHZ Math Olympiad Club}
+\date{17 March 2025}
+\begin{document}
+\maketitle
+\problem[Problem (unknown)]
+Find all real solutions to the equation
+\[
+9^{x} + 4^{x}+2^{x} = 8^{x} + 6^{x}+1.
+\]
+\problem[Problem 2 (Bernoulli Competition 2023)]
+Let \( e \) be Euler’s number. Show that for any odd prime \( p \), the integer
+\[
+1! + 2! + 3! + \cdots + (p-1)! - \left\lfloor \frac{(p-1)!}{e} \right\rfloor
+\]
+is divisible by \( p \).
+
+\problem[Problem in example page 140 (PUTNAM and BEYOND)]
+Find all real solutions to the equation
+\[
+4^{x} + 6^{x^{2}} = 5^{x} + 5^{x^{2}}.
+\]
+
+\problem[Problem 3 (Bernoulli Competition 2023)]
+Let $n\geq 1$ and \( A \) be a $n\times n$ symmetric matrix over \( \mathbb{F}_2 = \mathbb{Z}/2\mathbb{Z} \) with \( 1_{\mathbb{F}_2} \)’s on the main diagonal. Show that the vector composed uniquely of $1_{\mathbb{F}_2}$'s is in the image of \( A \).
+
+\problem[Problem (unknown)]
+\problem[Problem (unknown)]
+Find all differentiable functions \( f : \mathbb{R}_{>0} \to \mathbb{R}_{>0} \) having at least one fixed point $\alpha\in\mathbb{R}_{>0}$ satisfying:
+\[
+f' = \frac{f}{f \circ f}.
+\]
+\\\\
+\textbf{Bonus:} What happens if $f$ has no fixed point?
+\end{document}

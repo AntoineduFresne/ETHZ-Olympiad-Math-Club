@@ -1,0 +1,388 @@
+\documentclass[11pt, a4paper, oneside]{article}
+
+% ===== Page Layout =====
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+%\usepackage{microtype}  % Improved text justification
+
+% ===== Fonts & Encoding =====
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+
+% ===== Math Packages =====
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{tensor}
+\usepackage{mathtools}
+
+% ===== Graphics & Diagrams =====
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{pst-node}
+\usetikzlibrary{trees}
+
+% ===== Bibliography =====
+\usepackage{biblatex}
+\addbibresource{references.bib}  % Uncomment and add your .bib file
+
+% ===== Tables =====
+\usepackage{makecell}
+
+% ===== Colors =====
+\usepackage{xcolor}
+\definecolor{linkcolour}{rgb}{0.5,0,0}  % Dark red color for links
+
+% ===== Hyperlinks =====
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    breaklinks,
+    urlcolor=linkcolour, 
+    linkcolor=linkcolour,
+    citecolor=linkcolour
+}
+
+% ===== Custom Commands =====
+\newcommand{\problem}[1][]{\section*{#1} \hfill \par}
+\newcommand{\solution}[1][]{\subsection*{#1}\hfill \par}
+
+% ===== Theorem Environments =====
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{lemma}
+\newtheorem*{lemma}{Lemma}
+
+% ===== Text Highlighting =====
+\usepackage{soul}
+\newcommand\ba[1]{\setbox0=\hbox{$#1$}%
+\rlap{\raisebox{.45\ht0}{\textcolor{linkcolour}{\rule{\wd0}{1pt}}}}#1} 
+\def\bc#1{\textcolor{linkcolour}{BC note: {#1}}}
+\def\b#1{\textcolor{linkcolour}{{#1}}}
+
+% ===== Comment Environment =====
+\usepackage{comment}
+\begin{comment}
+Useful LaTeX fonts:
+\usepackage{mathptmx}
+\usepackage{txfonts}
+\usepackage{pxfonts}
+\usepackage{mathpazo}
+\usepackage{mathpple}
+\usepackage{kmath,kerkis}
+\usepackage{kurier}
+\usepackage{arev}
+\usepackage{euler}
+\usepackage{eulervm}
+\end{comment}
+\title{Picture Hanging Puzzle Solution}
+\author{ETHZ Math Olympiad Club}
+\date{15 September 2025}
+
+\begin{document}
+\maketitle
+\problem[Problem (Picture Hanging Puzzle, A. Spivak, 1997)]
+We have \(n \geq 1\) nails fixed to a wall and a sufficiently long rope wrapped around these nails. We consider here what we call \textit{oriented wrapping}, which means a circuit (with a direction) of the rope that may loop around the nails (either clockwise or counterclockwise). To help you imagine the situation, consider the two endpoints of the rope carrying a framed picture. We strongly encourage you to try to recreate the scenario in the real world with a sufficiently long rope and some nails or pins fixed to a surface. 
+\\\\
+Consider all oriented wrappings around the \(n\) nails satisfying the following two conditions:
+\begin{enumerate}
+    \item The circuit is non-trivial; that is, the rope remains securely wrapped (i.e., it does not fall off when all nails are present), or, equivalently, the framed picture does not fall.
+    \item When \textbf{any single nail} is removed (regardless of which one), the entire rope falls from the wall. In practice, some friction might prevent it from falling, but we consider it as "falling" if it is no longer securely wrapped.
+\end{enumerate}
+Here are examples where we have labelled the nails \(\textcolor{red}{c_0}\), \(\textcolor{blue}{c_1}\), and \(\textcolor{green!50!black}{c_2}\):
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=none,
+    xlabel=$x$,
+    ylabel=$y$,
+    xmin=-2, xmax=5,
+    ymin=-7, ymax=1,
+    xtick={-2, -1, 0, 1, 2, 3, 4, 5},
+    ytick={-7, -6, -5, -4, -3, -2, -1, 0, 1},
+    grid=none,
+    width=10cm,
+    height=10cm,
+    clip=false
+]
+% Plot the function f(x) = -x^2 + 2
+\addplot [
+    domain=-0.5:0.5,
+    samples=200,
+    color=brown,
+    thick,
+    smooth
+] {-7*x^2 + 2};
+% Draw a v to indicate direction 
+\node[magenta] at (-0.385, {-7*0.4^2+2}) {$\wedge$};
+\node[magenta] at (0.405, {-7*0.4^2+2}) {$\vee$};
+% Add critical point c₀ at (0, 1.5)
+\addplot [
+    only marks,
+    mark=*,
+    mark size=3pt,
+    color=black
+] coordinates {(0, 1.5)};
+
+% Label the critical point
+\node[red, above] at (0, 1.5) {$c_0$};
+\end{axis}
+\end{tikzpicture}
+\hspace{3cm}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=none,
+    xlabel=$x$,
+    ylabel=$y$,
+    xmin=-2, xmax=5,
+    ymin=-7, ymax=1,
+    xtick={-2, -1, 0, 1, 2, 3, 4, 5},
+    ytick={-7, -6, -5, -4, -3, -2, -1, 0, 1},
+    grid=none,
+    width=10cm,
+    height=10cm,
+    clip=false
+]
+
+% Draw circle x² + y² = 1/2
+\draw[thick, brown] (0, 0) circle[radius={sqrt(1/2)}];
+
+% Draw a v to indicate direction 
+\node[magenta] at ({sqrt(1/2)}, -1) {$\vee$};
+\node[magenta] at ({-sqrt(1/2)}, -1) {$\wedge$};
+% Draw vertical lines x = ±1/√2
+\draw[thick, brown] ({-1/sqrt(2)}, -1.5) -- ({-1/sqrt(2)}, 0);
+\draw[thick, brown] ({1/sqrt(2)}, -1.5) -- ({1/sqrt(2)}, 0);
+
+% Add critical point c₀ at (0,0)
+\addplot [
+    only marks,
+    mark=*,
+    mark size=3pt,
+    color=black
+] coordinates {(0, 0)};
+
+% Labels
+\node[red, above right] at (0, 0) {$c_0$};
+\end{axis}
+\end{tikzpicture}
+\caption{\textit{Oriented wrappings for $n=1$ \textbf{satisfying} the properties. The first configuration has a single loop around $\textcolor{red}{c_0}$ (clockwise), while the second has at least two clockwise loops around $\textcolor{red}{c_0}$.}}
+\label{fig:your_label_1}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=none,
+    xlabel=$x$,
+    ylabel=$y$,
+    xmin=-2, xmax=5,
+    ymin=-7, ymax=1,
+    xtick={-2, -1, 0, 1, 2, 3, 4, 5},
+    ytick={-7, -6, -5, -4, -3, -2, -1, 0, 1},
+    grid=none,
+    width=10cm,
+    height=10cm,
+    clip=false
+]
+% Draw a v to indicate direction 
+\node[magenta] at ({1-sqrt(1/2)}, 0.5) {$\wedge$};
+\node[magenta] at ({1+sqrt(1/2)}, 0.5) {$\vee$};
+% Plot critical points c₀ and c₁
+\addplot [
+    only marks,
+    mark=*,
+    mark size=3pt,
+    color=black
+] coordinates {
+    (-1, 1.5)
+    (1, 1.5)
+};
+
+% Draw circle equation (x-1)^2 + (y-1.5)^2 = 1/2
+\draw[thick, brown] (1, 1.5) circle[radius={sqrt(1/2)}];
+
+% Draw vertical line x = 1 - 1/√2
+\draw[thick, brown] ({1 - 1/sqrt(2)}, 0) -- ({1 - 1/sqrt(2)}, 1.5);
+\draw[thick, brown] ({1 + 1/sqrt(2)}, 0) -- ({1 + 1/sqrt(2)}, 1.5);
+
+% Label critical points
+\node[red, above] at (-1, 1.5) {$c_0$};
+\node[blue, above] at (1, 1.5) {$c_1$};
+
+% Add C₁ label (for circle)
+
+\end{axis}
+\end{tikzpicture}
+\hspace{3cm}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=none,
+    xlabel=$x$,
+    ylabel=$y$,
+    xmin=-2, xmax=5,
+    ymin=-7, ymax=1,
+    xtick={-2, -1, 0, 1, 2, 3, 4, 5},
+    ytick={-7, -6, -5, -4, -3, -2, -1, 0, 1},
+    grid=none,
+    width=10cm,
+    height=10cm,
+    clip=false
+]
+% Draw a v to indicate direction 
+\node[magenta] at (-3/2, -1) {$\wedge$};
+\node[magenta] at (3/2, -1) {$\vee$};
+% Plot the ellipse x² + 2y² = 4 (parametric form)
+\addplot [
+    domain=0:360,
+    samples=200,
+    color=brown,
+    thick,
+    smooth
+] ({3/2*cos(x)}, {3*sqrt(2)/4*sin(x)});
+
+% Draw vertical lines x = -2 and x = 2
+\draw[thick, brown] (-3/2, 0) -- (-3/2, -1.5);
+\draw[thick, brown] (3/2, 0) -- (3/2, -1.5);
+
+
+% Add points A(-1,0) and B(1,0)
+\addplot [
+    only marks,
+    mark=*,
+    mark size=3pt,
+    color=black
+] coordinates {
+    (-1, 0)
+    (1, 0)
+};
+
+% Label points
+\node[red, above] at (-1, 0) {$c_0$};
+\node[blue, above] at (1, 0) {$c_1$};
+\end{axis}
+\end{tikzpicture}
+\caption{\textit{Non-trivial oriented wrappings for $n=2$ \textbf{not satisfying} the property \(2\). The first configuration has no loop around $\textcolor{red}{c_0}$ but at least two clockwise loops around $\textcolor{blue}{c_1}$. The second configuration has at least two clockwise loops around both $\textcolor{red}{c_0}$ and $\textcolor{blue}{c_1}$.}}
+\label{fig:your_label_2}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=none,
+    xlabel=$x$,
+    ylabel=$y$,
+    xmin=-2, xmax=5,
+    ymin=-7, ymax=1,
+    xtick={-2, -1, 0, 1, 2, 3, 4, 5},
+    ytick={-7, -6, -5, -4, -3, -2, -1, 0, 1},
+    grid=none,
+    width=10cm,
+    height=10cm,
+    clip=false
+]
+% Plot the function f(x) = -x^4 + 2x^2 + 1
+\addplot [
+    domain=-1.5:1.5, % Focus on the interesting part around critical points
+    samples=200,
+    color=brown,
+    thick,
+    smooth
+] {-x^4 + 2*x^2 + 1};
+% Draw a v to indicate direction 
+\node[magenta] at (-1.45, {-1.45^4 + 2*1.45^2 + 1}) {$\wedge$};
+\node[magenta] at (1.45, {-1.45^4 + 2*1.45^2 + 1}) {$\vee$};
+% Add critical points c0, c1, c2
+\addplot [
+    only marks,
+    mark=*,
+    mark size=3pt,
+    color=black
+] coordinates {
+    (-1, 1.5)
+    (0, 1.5)
+    (1, 1.5)
+};
+
+% Label the critical points (optional)
+\node[red, above] at (-1, 1.5) {$c_0$};
+\node[blue, above] at (0, 1.5) {$c_1$};
+\node[green!50!black, above] at (1, 1.5) {$c_2$};
+\end{axis}
+\end{tikzpicture}
+\hspace{3cm}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=none,
+    xlabel=$x$,
+    ylabel=$y$,
+    xmin=-2, xmax=5,
+    ymin=-7, ymax=1,
+    xtick={-2, -1, 0, 1, 2, 3, 4, 5},
+    ytick={-7, -6, -5, -4, -3, -2, -1, 0, 1},
+    grid=none,
+    width=10cm,
+    height=10cm,
+    clip=false
+]
+
+% Plot points A(-1,0), B(0,0), C(1,0)
+\addplot [
+    only marks,
+    mark=*,
+    mark size=3pt,
+    color=black
+] coordinates {
+    (-1, 0)
+    (0, 0)
+    (1, 0)
+};
+
+% Draw circles around A and C
+\draw[brown, thick] (-1, 0) circle[radius=0.5];
+\draw[brown, thick] (1, 0) circle[radius=0.5];
+
+
+% Vertical lines
+\draw[brown, thick] (-1.5, -1.5) -- (-1.5, 0); % x = -3/2
+\draw[brown, thick] (0.5, -1.5) -- (0.5, 0);    % x = 1/2
+% Draw a v to indicate direction 
+\node[magenta] at (-3/2, -1) {$\wedge$};
+\node[magenta] at (0.5, -1) {$\vee$};
+% Ellipse (x-0.5)^2 + 2.3y^2 = 1 (parametric form)
+\addplot [
+    domain=180:360,
+    samples=200,
+    color=brown,
+    thick,
+    smooth
+] ({0.5 + cos(x)}, {sin(x)/sqrt(2.3)});
+
+
+% Labels for points
+\node[red, above] at (-1, 0) {$c_0$};
+\node[blue, above] at (0, 0) {$c_1$};
+\node[green!50!black, above] at (1, 0) {$c_2$};
+
+\end{axis}
+\end{tikzpicture}
+\caption{\textit{Nontrivial oriented wrappings for $n=3$ \textbf{not satisfying} the property \(2\). The first configuration has a single clockwise loop around $\textcolor{red}{c_0}$, no loop around $\textcolor{blue}{c_1}$, and a single clockwise loop around $\textcolor{green!50!black}{c_2}$. The second configuration has at least two clockwise loops around $\textcolor{red}{c_0}$, no loop around $\textcolor{blue}{c_1}$, and at least two counter-clockwise loops around $\textcolor{green!50!black}{c_2}$.}}
+\label{fig:quartic_function}
+\end{figure}
+For any oriented wrapping, we define its \textit{length} to be the number of loops in its circuit. Therefore, the lengths of the oriented wrappings in the above example are, respectively (for certain \(a,b,c,d,e \geq 2\)):
+\[
+1, \; a, \; b, \; 2c, \; 2, \; d+e.
+\]
+For each \(n \geq 1\), construct an oriented wrapping with the above two properties whose length is bounded by a polynomial in \(n\), more precisely, of length at most \(4n^2\).
+
+\end{document}

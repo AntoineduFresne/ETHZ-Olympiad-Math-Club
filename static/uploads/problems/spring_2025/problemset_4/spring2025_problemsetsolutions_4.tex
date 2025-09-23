@@ -1,0 +1,458 @@
+\documentclass[11pt, a4paper, oneside]{article}
+
+% ===== Page Layout =====
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{microtype}  % Improved text justification
+
+% ===== Fonts & Encoding =====
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+
+% ===== Math Packages =====
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{tensor}
+\usepackage{mathtools}
+
+% ===== Graphics & Diagrams =====
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{pst-node}
+
+% ===== Bibliography =====
+\usepackage{biblatex}
+%\addbibresource{references.bib}  % Uncomment and add your .bib file
+
+% ===== Tables =====
+\usepackage{makecell}
+
+% ===== Colors =====
+\usepackage{xcolor}
+\definecolor{linkcolour}{rgb}{0.5,0,0}  % Dark red color for links
+
+% ===== Hyperlinks =====
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    breaklinks,
+    urlcolor=linkcolour, 
+    linkcolor=linkcolour,
+    citecolor=linkcolour
+}
+
+% ===== Custom Commands =====
+\newcommand{\problem}[1][]{\section{#1} \hfill \par}
+\newcommand{\solution}[1][]{\subsection*{#1}\hfill \par}
+
+% ===== Theorem Environments =====
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{lemma}
+\newtheorem*{lemma}{Lemma}
+
+% ===== Text Highlighting =====
+\usepackage{soul}
+\newcommand\ba[1]{\setbox0=\hbox{$#1$}%
+\rlap{\raisebox{.45\ht0}{\textcolor{linkcolour}{\rule{\wd0}{1pt}}}}#1} 
+\def\bc#1{\textcolor{linkcolour}{BC note: {#1}}}
+\def\b#1{\textcolor{linkcolour}{{#1}}}
+
+% ===== Comment Environment =====
+\usepackage{comment}
+\begin{comment}
+Useful LaTeX fonts:
+\usepackage{mathptmx}
+\usepackage{txfonts}
+\usepackage{pxfonts}
+\usepackage{mathpazo}
+\usepackage{mathpple}
+\usepackage{kmath,kerkis}
+\usepackage{kurier}
+\usepackage{arev}
+\usepackage{euler}
+\usepackage{eulervm}
+\end{comment}
+
+\title{Problem Set Week 4 Solutions}
+\author{ETHZ Math Olympiad Club}
+\date{17 March 2025}
+\begin{document}
+\maketitle
+\problem[Problem (unknown)]
+Find all real solutions to the equation
+\[
+9^{x} + 4^{x}+2^{x} = 8^{x} + 6^{x}+1.
+\]
+\solution[Solution:] 
+It is easy to see that \( x = 0 \), \( x = 1 \), and \( x = 2 \) are solutions. So the equation has at least 3 distinct real solutions. Let us introduce the function \( f: \mathbb{R} \rightarrow \mathbb{R} \) defined by
+\[
+f(x) = 9^{x} + 4^{x} + 2^{x} - 8^{x} + 6^{x} + 1.
+\]
+As stated above, \( f \) has at least 3 distinct zeros. We claim there are no other roots. By Rolle's theorem, if a function \( g: \mathbb{R} \rightarrow \mathbb{R} \) has at least \( n \geq 2 \) zeros \( x_1 < \dots < x_n \), then the function \( g'(x) \) has at least \( n - 1 \) zeros \( y_1 < \dots < y_{n-1} \), where for each \( i = 1, \dots, n-1 \), we have \( x_i < y_i < x_{i+1} \). In particular, since for each \( a \in \mathbb{R}_{>0} \), \( a^{-x} g(x) \) has at least \( n \) zeros, we have that \( \left( a^{-x} g(x) \right)' \) has at least \( n - 1 \) zeros, and so does the function
+\[
+h_{a} g(x) = a^x \left( a^{-x} g(x) \right)' = g'(x) - \ln(a) g(x).
+\]
+Suppose \( f \) has another zero not in \( \{0, 1, 2\} \). Then \( f \) has at least \( 4 \) zeros, and thus
+\[
+h_{1} f(x) = f'(x) = \ln(9) 9^x + \ln(4) 4^x + \ln(2) 2^x - \ln(8) 8^x - \ln(6) 6^x
+\]
+has at least \( 3 \) zeros, which then implies that
+\[
+h_{6} h_{1} f(x) = f''(x) - \ln(6) f'(x)
+\]
+\[
+= \ln\left( \frac{9}{6} \right) \ln(9) 9^x + \ln\left( \frac{4}{6} \right) \ln(4) 4^x + \ln\left( \frac{2}{6} \right) \ln(2) 2^x - \ln\left( \frac{8}{6} \right) \ln(8) 8^x
+\]
+has at least \( 2 \) zeros, which again implies that
+\[
+h_{8} h_{6} h_{1} f(x) = \ln\left( \frac{9}{8} \right) \ln\left( \frac{9}{6} \right) \ln(9) 9^x - \ln\left( \frac{4}{8} \right) \ln\left( \frac{4}{6} \right) \ln(4) 4^x - \ln\left( \frac{2}{8} \right) \ln\left( \frac{2}{6} \right) \ln(2) 2^x
+\]
+has at least \( 1 \) zero.
+\\\\
+The function \( h_{8} h_{6} h_{1} f(x) \) is of the form \( k_{2} 2^x + k_{4} 4^x + k_{9} 9^x \), for $k_2, k_4, k_9>0$ and hence is always positive. Therefore, \( h_{8} h_{6} h_{1} f(x) \) cannot have any real zero. This is a contradiction to the assumptions hence the solutions of the original equation are exactly \( \{0, 1, 2\} \).
+\newpage
+\problem[Problem 2 (Bernoulli Competition 2023)]
+Let \( e \) be Euler’s number. Show that for any odd prime \( p \), the integer
+\[
+1! + 2! + 3! + \cdots + (p-1)! - \left\lfloor \frac{(p-1)!}{e} \right\rfloor
+\]
+is divisible by \( p \).
+\solution[Solution:]
+First note that:
+\[
+\frac{1}{e} = 1 - \frac{1}{1!} + \frac{1}{2!} - \frac{1}{3!} + \cdots = \sum_{i=0}^{+\infty} \frac{(-1)^i}{i!}.
+\]
+Thus, we have
+\[
+\left\lfloor \frac{(p-1)!}{e} \right\rfloor = \left\lfloor \sum_{i=0}^{+\infty} \frac{(-1)^i (p-1)!}{i!} \right\rfloor
+\]
+Notice that:
+$$\sum_{i=0}^{p-2} \frac{(-1)^i (p-1)!}{i!}\in\mathbb{Z}$$
+We argue that the tail $\sum_{i=p-1}^{+\infty} \frac{(-1)^i (p-1)!}{i!}\in]0;1[$, indeed since $p$ is odd:
+\[
+\sum_{i=p-1}^{+\infty} \frac{(-1)^i (p-1)!}{i!}= \sum_{j=0}^{+\infty} \left(\frac{(p-1)!}{(p-1+2j)!}-\frac{(p-1)!}{(p+2j)!}\right).
+\]
+is certainly bigger than $0$ since each term $\left(\frac{(p-1)!}{(p-1+2j)!}-\frac{(p-1)!}{(p+2j)!}\right)=\frac{(p-1)!}{(p-1+2j)!}\left(1-\frac{1}{p+2j}\right)>0$. Similarly since $p$ is odd:
+\[
+\sum_{i=p-1}^{+\infty} \frac{(-1)^i (p-1)!}{i!}=1-\sum_{j=0}^\infty \left(\frac{(p-1)!}{(p+2j)!}-\frac{(p-1)!}{(p+2j+1)!}\right).
+\]
+is certainly smaller than $1$ since each term $\left(\frac{(p-1)!}{(p+2j)!}-\frac{(p-1)!}{(p+2j+1)!}\right)=\frac{(p-1)!}{(p+2j)!}(1-\frac{1}{p+2j+1})>0$.
+\\\\
+Therefore,
+\[
+\left\lfloor \frac{(p-1)!}{e} \right\rfloor = \sum_{i=0}^{p-2} \frac{(-1)^i (p-1)!}{i!}.
+\]
+Now note that for each $0\leq j\leq p-1$ we have $j\equiv -(p-j)\pmod{p}$ and thus for fixed $0\leq i < p-1$:
+\[
+\frac{(-1)^i (p-1)!}{i!} = (-1)^i (i+1)(i+2)\cdots(p-1) \]
+\[
+\equiv (-1)^i (p-(i+1))(p-(i+2))\cdots 2 \cdot 1 \cdot (-1)^{p-(i+1)} \equiv (p-(i+1))! \pmod{p},
+\]
+where we used that there is $p-(i+1)$ factor in $\frac{(p-1)!}{i!}$ and the fact that \( p \) is odd again. Hence, we have
+\[
+\left\lfloor \frac{(p-1)!}{e} \right\rfloor \equiv \sum_{i=0}^{p-2} (p-(i+1))! \equiv \sum_{i=1}^{p-1} i! \pmod{p},
+\]
+since $i\mapsto p-(i+1)$ is a bijection from $\llbracket 0,p-2\rrbracket$ to $\llbracket 1,p-1\rrbracket$.
+This shows the problem’s statement.
+\problem[Problem in example page 140 (PUTNAM and BEYOND)]
+Find all real solutions to the equation
+\[
+4^{x} + 6^{x^{2}} = 5^{x} + 5^{x^{2}}.
+\]
+\solution[Solution:]
+Note that \(x = 0\) and \(x = 1\) satisfy the equation from the statement. Are there other solutions? The answer is no, but to prove it we use the amazing idea of treating the numbers 4, 5, 6 as variables and the presumably new solution \(x\) as a constant.
+\\\\
+Thus let us consider the function \(f(t) = t^{x^{2}} + (10 - t)^{x}\). The fact that \(x\) satisfies the equation from the statement translates to \(f(5) = f(6)\). By Rolle's theorem there exists \(c \in (5, 6)\), such that \(f'(c) = 0\). This means that
+\[
+x^{2}c^{x^{2} - 1} - x(10 - c)^{x - 1} = 0,
+\]
+or
+\[
+x c^{x^{2} - 1} = (10 - c)^{x - 1}.
+\]
+Because exponentials are positive, this implies that \(x\) is positive.
+\\
+If \(x > 1\), then $x^2-1> x-1$ and as $c>5$
+\[
+(10 - c)^{x - 1}=x c^{x^{2} - 1} > c^{x^{2} - 1} > c^{x - 1} > (10 - c)^{x - 1},
+\]
+which is a contradiction.
+\\\\
+If \(0 < x < 1\), then $x^2-1<x-1$ and:
+\[
+(10-c)^{x-1}=x c^{x^{2} - 1} < x c^{x - 1}.
+\]
+Let us prove that
+\[
+x c^{x - 1} < (10 - c)^{x - 1}.
+\]
+With the substitution \(y = x - 1\), the inequality can be rewritten as
+\[
+y + 1 < \left(\frac{10 - c}{c}\right)^{y}.
+\]
+which must be proven for \(y \in ]-1;0[\).
+\\\\
+Lets make a simple analysis of the two functions defined over $\mathbb{R}$.\\
+The exponential has base less than 1, so it is strictly decreasing, while the affine function on the left is strictly increasing. The two meet at \(y = 0\) so  we must have that strictly before $y=0$ the exponential is strictly bigger than the affine. The inequality (on $]-1;0[$) follows. Using it we conclude again that:
+\((10 - c)^{x - 1}=x c^{x^{2} - 1}<(10 - c)^{x - 1}\) which is a contradiction. This shows that a third solution to the equation from the statement does not exist. So the only solutions to the given equation are \(x = 0\) and \(x = 1\).
+\newpage
+\problem[Problem 3 (Bernoulli Competition 2023)]
+Let $n\geq 1$ and \( A \) be a $n\times n$ symmetric matrix over \( \mathbb{F}_2 = \mathbb{Z}/2\mathbb{Z} \) with \( 1_{\mathbb{F}_2} \)’s on the main diagonal. Show that the vector composed uniquely of $1_{\mathbb{F}_2}$'s is in the image of \( A \).
+\solution[Solution:]
+We write $1:=1_{\mathbb{F}_2}$ and $0:=0_{\mathbb{F}_2}$, define the $\mathbb{F}_{2}-$vector space $V=\mathbb{F}_2^n $ and define the standard binary product on \( V \), i.e.,
+\[
+\langle v, w \rangle = \sum_{i=1}^n v_i w_i.
+\]
+It is easy to see that $\langle \cdot, \cdot \rangle$ is $\mathbb{F}_{2}-$linear in the first coordinate, symmetric (so $\mathbb{F}_{2}-$linear in the second coordinate and thus $\mathbb{F}_{2}-$bilinear) and non-degenerate that is:
+$$\forall v\in V\left(\left(\forall w\in V \langle v,w\rangle=0\right) \rightarrow v=0_V\right)$$
+(\textit{just plug the canonical basis for $w$ that is for each $i\in n$ take $w=e_i$ and use the fact that $v_i\cdot 1_{\mathbb{F}_2}=v_i$ to conclude $v_i=0$, and thus $v=\underline{0}=0_V$}).
+\\\\
+With this being introduced, lets take an \( n \times n \)-matrix \( A \) with $\operatorname{diag}(A)=\underline{1}$.
+Since \( \langle \cdot, \cdot \rangle \) is symmetric and non-degenerate, we have for any $\mathbb{F}_2-$subspace \( W \subset V \),
+\[
+\left(W^{\perp}\right)^{\perp} = W.
+\] 
+where \( Z^\perp = \{ v \in V \mid \langle v, z \rangle = 0 \ \forall z \in Z \} \) for any $\mathbb{F}_{2}-$subspace \( Z \subset V \). For more information on this equality see the Appendix [\hyperref[A]{A}].
+Now write \( A = (a_{ij})_{1 \leq i, j \leq n} \) with \( a_{ii} = 1 \) and \( a_{ij} = a_{ji} \). Then we have for any \( v \in V \),
+\[
+\langle v, Av \rangle = \sum_{1 \leq i, j \leq n} v_i v_j a_{ij} = \sum_{i=1}^n v_i^2 + 2 \sum_{i < j} v_i v_j a_{ij} = \sum_{i=1}^n v_i = \langle v, \underline{1} \rangle,
+\]
+because we are working over \( \mathbb{F}_2 \). In particular for any \( z \in \operatorname{Im}(A)^\perp\subset V \),
+\[
+\langle z, \underline{1} \rangle = \langle z, Az \rangle = 0,
+\]
+since \( Az \in \operatorname{Im}(A) \) and $z\in Im(A)^{\perp}$. As $z\in Im(A)^{\perp}$ was arbitrary, we must have
+\[
+\underline{1}\in \left(\operatorname{Im}(A)^{\perp}\right)^{\perp} = \operatorname{Im}(A).
+\]
+\newpage
+\problem[Problem (unknown)]
+Find all differentiable functions \( f : \mathbb{R}_{>0} \to \mathbb{R}_{>0} \) having at least one fixed point $\alpha\in\mathbb{R}_{>0}$ satisfying:
+\[
+f' = \frac{f}{f \circ f}.
+\]
+\solution[Solution:]
+The identity function obviously works. We claim this is the only solution. Let $f:\mathbb{R}_{>0}\to\mathbb{R}_{>0}$ be a differentiable function with a fixed point $\alpha>0$ and satisfying:
+\[
+f' = \frac{f}{f \circ f}.
+\]
+Note that $f$ is continuous (since $f$ is differentiable), therefore we can integrate it and define for any $x>0$:
+\[
+F(x) := \int_{\alpha}^{x} f(t) \, \mathrm{d}t.
+\]
+The first fundamental theorem of calculus gives us easily that $F:\mathbb{R}_{>0}\to\mathbb{R}$ is continuous. Moreover, since $f$ is continuous, $F$ is everywhere differentiable with $F' = f$ (this holds for both $x \geq \alpha$ and $0<x < \alpha$). Because $f$ is always strictly positive, $F$ is strictly increasing and thus injective.
+
+Fix $x \in \mathbb{R}_{>0}$. From the given equation (valid for all $t>0$),
+\[
+f(t) = f(f(t)) f'(t) = F'(f(t)) f'(t) = (F \circ f)'(t),
+\]
+we obtain continuity of $(F \circ f)'$ and so its integrability, thus:
+\[
+F(x) = \int_{\alpha}^{x} f(t) \, \mathrm{d}t = \int_{\alpha}^{x} (F \circ f)'(t) \, \mathrm{d}t = (F \circ f)(x) - (F \circ f)(\alpha),
+\]
+where we used the second fundamental theorem of calculus for the function $(F \circ f)'$ (this holds for both $x \geq \alpha$ and $0<x < \alpha$).
+\\\\
+Now, using the fact that $\alpha$ is a fixed point of $f$, we get $F(f(\alpha)) = F(\alpha) = 0$, so $F(x) = F(f(x))$. By the injectivity of $F$, we conclude that $f(x) = x$. Since $x > 0$ was arbitrary, the proof is complete.
+\\\\
+\textbf{Bonus:} What happens if $f$ has no fixed point?
+
+\solution[Solution:]
+Let $f:\mathbb{R}_{>0}\to\mathbb{R}_{>0}$ be a differentiable function satisfying:
+\[
+f' = \frac{f}{f \circ f}
+\]
+such that $f$ has \textbf{no} fixed point. Note that $f$ takes positive values, so we must have that $f' = \frac{f}{f \circ f}$ takes strictly positive values. Therefore, $f$ must be strictly increasing and hence injective. From this, we derive the equivalence $\forall \beta>0$:
+\[
+f'(\beta) = 1 \Leftrightarrow f(\beta) = f(f(\beta)) \Leftrightarrow f(\beta) = \beta.
+\]
+Thus, the existence of a fixed point $\beta>0$ is equivalent to the fact that $f'(\beta) = 1$. Since $f$ has no fixed point, $f'$ can never take the value $1$. As we have seen in the first part, $f$ is continuous, so must be $f \circ f$, and thus $f'$ is continuous (being the quotient of the continuous function $f$ with $f \circ f$). Knowing this, we infer that we cannot have one value of $f'$ strictly bigger than $1$ and one value strictly less than $1$; otherwise, by the intermediate value theorem (or simply because the image of a connected set is connected), we would have $1$ as a value of $f'$. Hence, we must be in two cases:
+$$\text{either }\forall x>0,\, f'(x) > 1\text{ or }\forall x>0,\,f'(x) < 1.$$
+
+$\bullet$ If $\forall x>0$, $f'(x) > 1$, then in particular, $f'(1) > 1$, so $f(1) > f(f(1))$. Since $f$ is strictly increasing, we must have $1 > f(1)$ (if $1 \leq f(1)$, then $f(1) \leq f(f(1))$, so $f(1) < f(1)$, a contradiction). Since $f'$ is continuous, it is integrable over any compact interval in $\mathbb{R}_{>0}$. Because $\forall t>0$, $f'(t) > 1$, we have for any $0 < x < 1$:
+\[
+f(1) - f(x) = \int_{x}^{1} f'(t) \, \mathrm{d}t \geq \int_{x}^{1} 1 \, \mathrm{d}t = 1 - x
+\]
+where we used the second fundamental theorem of calculus for the functions $f'$ and $\underline{1}$ and the fact $\int_{x}^{1} \_ \mathrm{d}t$ is increasing from the space of real-valued integrable functions over $[x,1]$.
+\\\\
+Thus, $\forall x>0$ with $x<1$,
+\[
+f(x) \leq (f(1) - 1) + x.
+\]
+But then, for any $0 < y < 1 - f(1)<1$, we have $f(y) < 0$, contradicting the positivity of $f$.
+
+$\bullet$ This means we must be in the latter case $\forall x>0$, $f'(x) < 1$. Here the problem becomes significantly more challenging. Since $f'(x)$ is determined by the value of $f$ at $x$ and its composition $f \circ f$ at $x$, and because $f(f(x)) > f(x)$ (as $f'(x)<1$), the derivative $f'(x)$ depends on values of $f$ at points beyond $f(x)$. This leads to a non-causal delay differential equation. We will classify all differentiable functions \( f: \mathbb{R}_{>0} \to \mathbb{R}_{>0} \) satisfying $\forall x \in \mathbb{R}_{>0}\, f'(x) < 1$ and:
+\[
+f' = \frac{f}{f\circ f}.
+\]
+\[
+\substack{\textit{Not done yet; I have some incomplete arguments. See the related \href{https://math.stackexchange.com/questions/5051989/solve-the-differential-equation-f-f-f-circ-f}{MathStack Exchange thread}}\\
+\textit{If you have a solution, send them to me:} \\ \href{mailto:antoine@du-fresne.ch}{antoine@du-fresne.ch}}
+\]
+temptative
+Define as in the first part for $x>0$ (since $f$ is continuous): $F(x)=\int_{1}^{x}f(t)\mathrm{d}t$. Since $f$ is always strictly positive, $F$ is strictly increasing and thus injective, therefore invertible in its image $F[\mathbb{R}_{>0}]$. Denote by $g:F[\mathbb{R}_{>0}]\rightarrow \mathbb{R}_{>0}$ its inverse. Then $g$ is derivable \textbf{ WHY???}. Moreover $g'$=
+\begin{theorem}[Transformation to Delay Equation]\label{thm:delay}Let \( f \) satisfy the functional equation with \( \exists x: f'(x) < 1 \). Define \( F(x) = \int_{1}^x f(t)dt \) and \( g = F^{-1} \). 
+Then \( g \) satisfies:
+\[
+g'(x) = \frac{1}{g(x + 1)} \quad \text{with} \quad g(0) = 0.
+\]
+\end{theorem}
+
+\begin{proof}
+\textbf{Step 1: Injectivity.} Since \( f > 0 \), \( F \) is strictly increasing and invertible. Let \( g = F^{-1} \).
+
+\textbf{Step 2: Differentiation.} By inverse function theorem:
+\[
+g'(x) = \frac{1}{f(g(x))}.
+\]
+
+\textbf{Step 3: Functional Relation.} From the original equation:
+\[
+f(f(x))f'(x) = f(x) \implies (F \circ f)'(x) = f(x).
+\]
+Integrate from \( \alpha \) to \( x \):
+\[
+F(f(x)) - F(f(\alpha)) = F(x) - F(\alpha).
+\]
+Absorb constants by translation to get \( F(f(x)) = F(x) + 1 \).
+
+\textbf{Step 4: Delay Equation.} Differentiate \( F(f(x)) = F(x) + 1 \):
+\[
+f(f(x))f'(x) = f(x) \implies f'(x) = \frac{f(x)}{f(f(x))} = \frac{1}{g(F(x) + 2)}.
+\]
+Substitute \( f(x) = g(F(x) + 1) \):
+\[
+g'(F(x) + 1) = \frac{1}{g(F(x) + 2)} \implies g'(x) = \frac{1}{g(x + 1)}.
+\]
+\end{proof}
+
+\section{Constructing Solutions}
+
+\begin{theorem}[Existence and Uniqueness]\label{thm:existence}
+There exists a unique global solution \( g: \mathbb{R} \to \mathbb{R}_{>0} \) to the delay equation \( g'(x) = \frac{1}{g(x + 1)} \) with \( g(0) = 0 \).
+\end{theorem}
+
+\begin{proof}
+\textbf{Base Case:} Define \( g \) on \( [0, 1] \) as any \( \mathcal{C}^1 \)-function with:
+\[
+g(0) = 0, \quad g(1) = \beta > 0, \quad g'(0^+) = \infty.
+\]
+
+\textbf{Forward Construction ($x \geq 1$):} For \( x \in [n, n+1] \):
+\[
+g'(x) = \frac{1}{g(x - n + 1)}.
+\]
+Integrate recursively using known values from \( [n-1, n] \).
+
+\textbf{Backward Construction ($x < 0$):} For \( x \in [-n, -n+1] \):
+\[
+g(x) = \int_0^x \frac{1}{g(t + 1)} dt.
+\]
+Solve sequentially from \( n=1 \) using prior intervals.
+
+\textbf{Monotonicity:} By induction:
+\begin{itemize}
+\item If \( g \) is increasing on \( [k, k+1] \), then \( g' > 0 \) on \( [k+1, k+2] \)
+\item Backward solutions inherit monotonicity from forward terms
+\end{itemize}
+
+\textbf{Asymptotics:} For large \( x \), approximate:
+\[
+g(x) \approx \sqrt{2x} \quad \text{since} \quad \frac{d}{dx}\sqrt{2x} = \frac{1}{\sqrt{2x}} \approx \frac{1}{\sqrt{2(x+1)}}.
+\]
+
+\textbf{Uniqueness:} Follows from Lipschitz continuity in \( g \) on bounded intervals and recursive determination.
+\end{proof}
+
+\section{Recovering Original Functions}
+
+\begin{theorem}[Solution Family]\label{thm:family}
+All solutions with \( f'(x) < 1 \) are scaling transformations:
+\[
+f_a(x) = a \cdot g\left(\frac{1}{a^2} \int_{\alpha}^{x/a} g^{-1}(t) dt + 1\right)
+\]
+for \( a > 0 \), where \( g \) solves Theorem \ref{thm:delay}.
+\end{theorem}
+
+\begin{proof}
+\textbf{Inversion:} Given \( g \), define \( F(x) = \int_{\alpha}^x f(t)dt \). Then:
+\[
+f(x) = g(F(x) + 1).
+\]
+
+\textbf{Scaling Invariance:} Let \( f_a(x) = a \cdot f(x/a) \). Then:
+\[
+f_a'(x) = f'(x/a) = \frac{f(x/a)}{f(f(x/a))} = \frac{f_a(x)}{f_a(f_a(x))}.
+\]
+Thus \( f_a \) satisfies the original equation.
+
+\textbf{Parameterization:} The scaling parameter \( a \) generates distinct solutions through:
+\[
+g_a(x) = a \cdot g\left(\frac{x}{a^2}\right).
+\]
+\end{proof}
+\begin{remark}
+The fundamental solution \( g \) exhibits delayed dependence, making the system non-Markovian. For numerical constructions, see this \href{https://www.desmos.com/calculator/hfizeaaf9k}{interactive graph}. We thank everyone that participate in the related \href{https://math.stackexchange.com/questions/5051989/solve-the-differential-equation-f-f-f-circ-f}{MathStack Exchange thread}.
+\end{remark}
+\newpage
+\appendix
+\section{}
+\label{A}
+Let \( E \) be a finite-dimensional vector space over a field \( K \), and \( B: E \times E \to K \) a symmetric bilinear form. For any subspace \( Q \subseteq E \), the orthogonal complement is defined as \( Q^\perp := \left\{ v \in E \mid \forall q \in Q, \, B\left(q, v\right) = 0 \right\} \). It is clearly a \( K \)-subspace of \( E \). The form \( B \) is non-degenerate if \( E^\perp = \left\{0\right\} \). For a non-degenerate symmetric bilinear form \( B \), the map
+\[
+\varphi: E \to E^{\vee}, \quad v \mapsto B\left(\cdot, v\right)
+\]
+is a vector space isomorphism. Indeed, \( B \) is bilinear, so \( \varphi \) is linear. The injectivity follows from
+\[
+\varphi\left(v\right) = 0_{E^{\vee}} \implies \forall w \in E, \, B\left(w, v\right) = 0 \implies v \in E^\perp = \left\{0\right\} \quad \left(\text{by non-degeneracy}\right).
+\]
+As \( \dim\left(E\right) = \dim\left(E^{\vee}\right) \) in finite dimensions (classical), injectivity implies surjectivity. Thus, \( \varphi \) is an isomorphism.
+
+\begin{theorem}[Double Orthogonal Complement]
+    In this setting, if \( B \) is non-degenerate and \( Q \subseteq E \) is a \( K \)-subspace, then \( \left(Q^{\perp}\right)^{\perp} = Q \).
+\end{theorem}
+
+\begin{proof}
+    \textbf{Step 1.} \( Q \subseteq \left(Q^{\perp}\right)^{\perp} \): Let \( q \in Q \), then,
+    \[
+    \forall v \in Q^\perp, \, 0=B\left(q, v\right) = B\left(v,q\right) \implies q \in \left(Q^{\perp}\right)^{\perp}.
+    \]
+    \textbf{Step 2.} Using the isomorphism \( \varphi \), we have that \( \varphi|_{Q^{\perp}} \) is an isomorphism onto its image:
+    \[
+    \operatorname{Im}\left(\varphi|_{Q^{\perp}}\right) = \left\{ B\left(-, v\right) \mid v \in Q^{\perp} \right\} = \left\{ f \in E^{\vee} \mid \forall q \in Q, \, f\left(q\right) = 0 \right\} =: Q^{\circ}.
+    \]
+    The middle equality's \( \supset \) inclusion follows from the surjectivity of \( \varphi \) and the definition of \( Q^{\perp} \). Thus, \( \dim\left(Q^{\perp}\right) = \dim\left(Q^{\circ}\right) \).\\
+    \textbf{Step 3.} Given an ordered basis \( \left\langle w_i\right\rangle_{i \in \dim\left(Q\right)} \) of \( Q \), complete it into an ordered basis of \( E \):
+    \[
+    \left\langle w_i\right\rangle_{i \in \dim\left(Q\right)} \frown \left\langle v_j\right\rangle_{j \in \dim\left(E\right) - \dim\left(Q\right)}.
+    \]
+    There is a classical associated ordered basis of \( E^{\vee} \):
+    \[
+    \left\langle w_i^*\right\rangle_{i \in \dim\left(Q\right)} \frown \left\langle v_j^*\right\rangle_{j \in \dim\left(E\right) - \dim\left(Q\right)},
+    \]
+    where each functional sends a vector \( v = \sum_{j \in \dim\left(Q\right)} \lambda_j w_j + \sum_{i \in \dim\left(E\right) - \dim\left(Q\right)} \gamma_i v_i \) of \( E \) to \( \lambda_j \) or \( \gamma_i \), respectively. This basis satisfies the following property: if \( f \in E^{\vee} \), then we can write
+    \[
+    f = \sum_{i \in \dim\left(Q\right)} f\left(w_i\right) w_i^* + \sum_{j \in \dim\left(E\right) - \dim\left(Q\right)} f\left(v_j\right) v_j^*.
+    \]
+    In particular, if \( f \in Q^{\circ} \), then \( f = \sum_{j \in \dim\left(E\right) - \dim\left(Q\right)} f\left(v_j\right) v_j^* \), because \( \left\{w_i \mid i \in \dim\left(Q\right)\right\} \subset Q \). Thus, \( \left\langle v_j^*\right\rangle_{j \in \dim\left(E\right) - \dim\left(Q\right)} \) generates \( Q^{\circ} \). Since these vectors are \( K \)-linearly independent, we obtain
+    \[
+    \dim\left(E\right) - \dim\left(Q\right) = \dim\left(Q^{\circ}\right).
+    \]  
+    \textbf{Step 4.} In total, we obtain that for any \( K \)-subspace \( Q \) of \( E \),
+    \[
+    \dim\left(Q^{\perp}\right) = \dim\left(Q^{\circ}\right) = \dim\left(E\right) - \dim\left(Q\right).
+    \]
+    Since \( Q^{\perp} \) is a \( K \)-subspace, we must have:
+    \[
+    \dim\left(\left(Q^{\perp}\right)^{\perp}\right) = \dim\left(E\right) - \dim\left(Q^{\perp}\right) = \dim\left(E\right) - \left(\dim\left(E\right) - \dim\left(Q\right)\right) = \dim\left(Q\right).
+    \]
+    We conclude \( Q = \left(Q^{\perp}\right)^{\perp} \) since \( Q \subset \left(Q^{\perp}\right)^{\perp} \) and they have the same (crucially finite) dimension.
+\end{proof}
+\end{document}

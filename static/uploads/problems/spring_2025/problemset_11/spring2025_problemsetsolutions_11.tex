@@ -1,0 +1,213 @@
+\documentclass[11pt, a4paper, oneside]{article}
+
+% ===== Page Layout =====
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{microtype}  % Improved text justification
+
+% ===== Fonts & Encoding =====
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+
+% ===== Math Packages =====
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{tensor}
+\usepackage{mathtools}
+
+% ===== Graphics & Diagrams =====
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{pst-node}
+
+% ===== Bibliography =====
+\usepackage{biblatex}
+%\addbibresource{references.bib}  % Uncomment and add your .bib file
+
+% ===== Tables =====
+\usepackage{makecell}
+
+% ===== Colors =====
+\usepackage{xcolor}
+\definecolor{linkcolour}{rgb}{0.5,0,0}  % Dark red color for links
+
+% ===== Hyperlinks =====
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    breaklinks,
+    urlcolor=linkcolour, 
+    linkcolor=linkcolour,
+    citecolor=linkcolour
+}
+
+% ===== Custom Commands =====
+\newcommand{\problem}[1][]{\section{#1} \hfill \par}
+\newcommand{\solution}[1][]{\subsection*{#1}\hfill \par}
+
+% ===== Theorem Environments =====
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{lemma}
+\newtheorem*{lemma}{Lemma}
+
+% ===== Text Highlighting =====
+\usepackage{soul}
+\newcommand\ba[1]{\setbox0=\hbox{$#1$}%
+\rlap{\raisebox{.45\ht0}{\textcolor{linkcolour}{\rule{\wd0}{1pt}}}}#1} 
+\def\bc#1{\textcolor{linkcolour}{BC note: {#1}}}
+\def\b#1{\textcolor{linkcolour}{{#1}}}
+
+% ===== Comment Environment =====
+\usepackage{comment}
+\begin{comment}
+Useful LaTeX fonts:
+\usepackage{mathptmx}
+\usepackage{txfonts}
+\usepackage{pxfonts}
+\usepackage{mathpazo}
+\usepackage{mathpple}
+\usepackage{kmath,kerkis}
+\usepackage{kurier}
+\usepackage{arev}
+\usepackage{euler}
+\usepackage{eulervm}
+\end{comment}
+
+\title{Problem Set Week 11 Solutions}
+\author{ETHZ Math Olympiad Club}
+\date{19 May 2025}
+\begin{document}
+\maketitle
+\problem[Problem 1 (Bernoulli Competition 20203)]
+1. Let \( A = \{1, 2, \ldots, 100\} \) be the set of integers between 1 and 100.
+
+(a) Let \( B \subset A \) be a subset that doesn't contain two consecutive integers. What is the maximal cardinality of \( B \)?
+
+(b) Let \( C \subset A \) be a subset such that there is no \( n \) for which \( n \) and \( 2n \) are both in \( C \). What is the maximal cardinality of \( C \)?
+
+\solution[Solution:]
+\textbf{Solution to part a:} One can easily construct a legal set \( B \) with 50 elements by setting it equal to the set of odd numbers from 1 to 100, or the set of even numbers from 1 to 100. That leaves proving that one cannot do better. In order to do that, observe that \( A \) can be partitioned into 50 pairs of an odd number and the next even number, i.e. \( A = \{1, 2\} \cup \{3, 4\} \cup \ldots \cup \{99, 100\} \). \( B \) can contain at most one element of each of these pairs, so it has at most 50 elements. Therefore, the maximum possible cardinality of \( B \) is \(\boxed{50}\).
+
+\textbf{Alternate solution to part a:} One can easily construct a legal set \( B \) with 50 elements by setting it equal to the set of odd numbers from 1 to 100, or the set of even numbers from 1 to 100. That leaves proving that one cannot do better. In order to do that, first let \( x_1, \ldots, x_m \) be the elements of \( B \) in increasing order. The fact that no two elements of \( B \) are consecutive implies that \( x_{i+1} \geq x_i + 2 \) for all \( i \), so \( x_m \geq x_1 + 2(m-1) \geq 2m-1 \). However, \( x_m \leq 100 \) due to being in \( A \), so it must be the case that \( m \leq 50 \). Therefore, the maximum possible cardinality of \( B \) is \(\boxed{50}\).
+
+\textbf{Solution to part b:} For each nonnegative integer \( m \), let \( A_m = A \cap \{(2m+1)2^i : i \in \mathbb{Z}\} \), and observe that these are disjoint and \( A = \cup_{0 \leq i \leq 49} A_i \). The requirement on \( C \) is equivalent to saying that it never contains both \((2m+1)2^i\) and \((2m+1)2^{i+1}\), so \( |C \cap A_i| \leq \lfloor |A_i|/2 \rfloor \) by an argument from the solution to the previous part. We can ensure that \( |C \cap A_i| = \lfloor |A_i|/2 \rfloor \) for all \( m \), such as by having \( C \) be the set of every element of \( A \) that can be expressed as an odd number times a power of 4. There are 50 odd numbers in \( A \), 13 odd multiples of 4, 3 odd multiples of 16, and 1 odd multiple of 64. So, \( C \) has a cardinality of \( 50 + 13 + 3 + 1 = \boxed{67} \).
+
+\textbf{Alternate solution to part b:} Observe that for any \( 51 \leq m \leq 100 \), if we let \( C' = C \cup \{m\} \backslash \{m/2\} \) then \( C' \) contains at least as many elements as \( C \) and does not contain both \( n \) and \( 2n \) for any \( n \). So, we can assume that \( C \) contains \( n \) for all \( 51 \leq n \leq 100 \). In this case, it cannot contain any \( 26 \leq n \leq 50 \). Then by the same logic we can assume that \( C \) contains \(\{13, \ldots, 25\}\), which forces it not to contain any \( 7 \leq n \leq 12 \). Then we can assume that it contains \(\{4, 5, 6\}\), which means it does not contain 2 or 3, at which point we can have it contain 1. So, the maximum possible cardinality of \( C \) is \( 50 + 13 + 3 + 1 = \boxed{67} \).
+
+\newpage
+\problem[Problem (selected real analysis problem)]
+Determine wheter there exists a continuous function $f:\mathbb{R}\rightarrow\mathbb{R}$ (standard topology) such that $f\circ f=F$
+where $F(x)=-x$, $F(x)=\exp(x)$, $F(x)=x^2-2$,
+\solution[Solution:]
+\begin{itemize}
+    \item[(a)] Prove that \( f(0) = 0 \) and investigate the sign of \( f(x) \) for \( x > 0 \).
+    \item[(b)] Prove that \( f \) is strictly increasing and that \( \inf f = a \in (-\infty, 0) \), \( f(a) = 0 \). Fix an arbitrary strictly increasing function \( f_0 \in C([a,0]) \) satisfying the conditions \( f_0(a) = 0 \) and \( f_0(0) = e^a \), and extend it to \( \mathbb{R} \) by using the equation.
+    \item[(c)] Prove that \( f \) must be strictly increasing on \( [0, +\infty) \) and strictly decreasing on \( (-\infty, 0] \) and that \( f(0) \geq 0 \), which is impossible, because \( F \), and hence \( f \), takes negative values.
+\end{itemize}
+\textbf{Bonus:} If $F(x)=\cos(x)$ ?
+\solution[Solution:]
+To begin we do some preliminary work (some of the result are well known but for the sake of completeness we give the "proofs"):
+\\\\
+-The function $cos$ has a unique fixed point over $\mathbb{R}$ ($\exists!\alpha\in\mathbb{R}\,(cos(\alpha)=\alpha)$) which is moreover located between $]0,1[$. We define in a classical manner (for this kind of fixed point problem) the function:
+\[\begin{tikzcd}
+	{\varphi:} & {\mathbb{R}} & {\mathbb{R}} \\
+	& x & {x-cos(x)=x-\sum_{i\in\mathbb{N}}(-1)^{i}\cdot\frac{x^{2\cdot i}}{(2\cdot i)!}}
+	\arrow[from=1-2, to=1-3]
+	\arrow[maps to, from=2-2, to=2-3]
+\end{tikzcd}\]
+$\varphi$ is clearly $C^{\infty}(\mathbb{R})$ and even analytic. We study $\varphi$ and show that in fact it has only one zero: $|\varphi^{-1}[\{0\}]|=1$ which will conclude the existence and unicity of the fixed point over $\mathbb{R}$. Notice that $\frac{d}{dx}(\varphi)=1-sin\geq \underline{0}$. The theorem relating the type of monotonicity and the sign of the derivative tell us therefore that $\varphi$ is increasing. As $\varphi(0)=-1$ and $\varphi(1)=1-cos(1)\overset{1\in]0;\frac{\pi}{2}[}{>}0$, we have that:
+$$\varphi\big[]-\infty;0]\big]\subset]-\infty;-1]\subset]-\infty;0[$$ and $$\varphi\big[[1;+\infty[\big]\subset[\varphi(1);+\infty[\subset]0;+\infty[$$
+Thus $\varphi^{-1}[\{0\}]\subset]0;1[$
+and moreover we have by the intermediate value theorem (or the more general topological version: image of a connected set through a continuous function is connected and knowing that only the intervals are precisely the connected set of $(\mathbb{R},\mathcal{T}_{\mathbb{R}})$) that $0\in[-1;\varphi(1)]\subset\varphi\big[[0;1]\big]$. This shows that $|\varphi^{-1}[\{0\}]|\geq 1$. We know by the property of sin:
+$$\forall x\in\mathbb{R}\big((\frac{d}{dx}(\varphi))(x)=0\leftrightarrow x\in\frac{\pi}{2}+2\cdot\pi\mathbb{Z}\big)$$
+Therefore we have the refinement that $\varphi$ is strictly increasing over each connected component of $\mathbb{R}\setminus(\frac{\pi}{2}+2\cdot\pi\mathbb{Z})$. However $]\frac{\pi}{2}-2\cdot\pi;\frac{\pi}{2}[$ is one of the connected component. This means that $\varphi$ is strictly increasing over $]0;1[\subset]\frac{\pi}{2}-2\cdot\pi;\frac{\pi}{2}[$ in particular it is injective. We saw that $\varphi^{-1}[\{0\}]\subset]0;1[$ so this means that $|\varphi^{-1}[\{0\}]|=1$. This concludes that there is a unique fixed point of $cos$ over $\mathbb{R}$. For the culture, this fixed point is called the $\textit{Dottie}$ number.
+The decimal expansion of the Dottie number is
+$0.739085133215160641655312087673873404...$
+and one can show using some advanced techniques like the Lindemann–Weierstrass theorem that it is also a transcendental number. How can we attain such a number ? It is easy: $cos$ is a contraction on $[0;1]$ ! Indeed its derivative ($-sin$) is continuous therefore bounded over the compact $[0;1]$ and it appears that those bound are strictly less than $1$ ! To be more precise, let $a,b\in[0;1]$, when $a\neq b$ we have by the mean value theorem ($cos\in C^{\infty}(\mathbb{R})$) that $\exists c\in]a;b[$ such that $-sin(c)=(\frac{d}{dx}cos)(c)=\frac{cos(a)-cos(b)}{a-b}$. Therefore we obtain:
+$$|cos(a)-cos(b)|\leq max|-sin|\big[[0;1]\big]\cdot|a-b|$$
+$$\overset{sin\text{ is strictly increasing over } [0;\frac{\pi}{2}]}{=}sin(1)\cdot|a-b|$$
+This bounds (which works even for $a=b$) shows that $cos$ is a contraction over $[0;1]$ \textbf{provided} $sin(1)<1$ which is the case since $sin$ is strictly increasing over $[0;\frac{\pi}{2}]$ ($1<\frac{\pi}{2}$ so that $sin(1)<sin(\frac{\pi}{2})=1$). Therefore a common application of the Banach fixed point theorem for the complete metrix space $([0;1],|\cdot|)$ tell us not only that there is a unique fixed point of $cos$ over $[0;1]$ (we already know this information) but also the way the fixed point is constructed. Take any $x\in[0;1]$, the fixed point is the limit ($[0;1]$ is  complete) of the sequence $(cos^{\circ n}(x))_{n\in\mathbb{N}}\in[0;1]^{\mathbb{N}}$ where $cos^{\circ n}$ denotes the functional composition of $cos$ with itself $n$ times ($cos^{\circ 0}=Id$). This means that $lim _{n\rightarrow+\infty}(cos|_{[0;1]})^{\circ n}=cte_{\alpha}$ where $\alpha$ is the Dottie number. Apparently the generalized case 
+$cos(z)=z$ where $z\in\mathbb{C}$ has infinitely many solutions (it uses Picard's theorem).
+\\\\
+-Let us denote the Dottie number by $\alpha\in]0;1[$. We claim that any function $g:\mathbb{R}\rightarrow\mathbb{R}$ satisfying $g\circ g=cos$ share the same fixed point of $cos$ namely $\alpha$ and must be injective over $[0;\frac{\pi}{2}]$. Indeed suppose $g\circ g= cos$ then:
+$$cos(g(\alpha))=(g\circ g)(g(\alpha))=g((g\circ g)(\alpha))=g(cos(\alpha))=g(\alpha)$$
+Therefore $g(\alpha)$ is a fixed point of $cos$, by the unicity of the Dottie number we must have $g(\alpha)=\alpha$. The injectivity follows easily from the equality $g\circ g=cos$ and noting that $cos$ is a bijection from $[0;\frac{\pi}{2}]$ to $[0;1]$ we must have (classic) from the equality $g\circ g=cos$ the injectivity of $g$ over $[0;\frac{\pi}{2}]$ (and the surjectivity of $g$ as well over [0;1]).
+\\\\
+
+-Let \( I \) be a real interval. Let \( h: I \to \mathbb{R} \) be an injective continuous real function. Then \( h \) is strictly monotone.
+Aiming for a contradiction, suppose \( h \) is not strictly monotone. If we let $\phi_{</>}(h):\forall x\in dom(h)\forall y\in dom(h)\,(x<y\rightarrow h(x)</>h(y))$ respectively. Not being strictly monotone therefore means:
+$$\neg(\phi_{<}(h)\vee\phi_{>}(h))$$
+That is equivalent to \textcolor{red}{attention pas fini on utilise maintenant le fait que $I$ soit un intervalle!!!}  voir \href{https://www.youtube.com/watch?v=dKuG4f3PT9s}{video} \textcolor{green}{ou bien voir la serie 6.2 exo 3 de analyse I avec Hongler}: there exist \( x, y, z \in I \) with \( x < y < z \) such that either:
+\[
+(h(x) \leq h(y) \text{ and } h(y) \geq h(z))\text{ or }
+(h(x) \geq h(y) \text{ and } h(y) \leq h(z))
+\]
+Suppose \( h(x) \leq h(y) \text{ and } h(y) \geq h(z) \). If \( h(x) = h(y) \), or \( h(y) = h(z) \), or \( h(x) = h(z) \), \( h \) is not injective, which is a contradiction. Thus, \( h(x) < h(y) \text{ and } h(y) > h(z) \). Suppose \( h(x) < h(z) \). That is:
+\[
+h(x) < h(z) < h(y)
+\]
+As \( h \) is continuous on \( I \), the Intermediate Value Theorem (same theorem as before) can be applied. Hence there exists \( c \in ]x, y[ \) such that \( h(c) = h(z) \). As \( z \notin ]x, y[ \), we have \( c \neq z \). So \( h \) is not injective, which is a contradiction. Suppose instead \( h(x) > h(z) \). That is:
+\[
+h(z) < h(x) < h(y)
+\]
+Again, as \( h \) is continuous on \( I \), the Intermediate Value Theorem can be applied so that there exists \( c \in ]y, z[ \) such that \( h(c) = h(x) \). But then \( h \) is again not injective, which is a contradiction.
+If we suppose \( h(x) \geq h(y) \text{ and } h(y) \leq h(z) \), then by taking the function $\tilde{h}:=-h$ which is also injective and continuous over $I$, we have that $\tilde{h}(x)\leq \tilde{h}(y)\text{ and } \tilde{h}(y)\geq \tilde{h}(z)$ and we obtain the same contradiction as above by performing the same proof for $h$.
+Therefore $h$ is strictly monotone.
+\\\\
+
+-Now we can prove the result: we argue by contradiction. Let us fix a real continuous function $f:(\mathbb{R},\mathcal{T}_{\mathbb{R}})\longrightarrow(\mathbb{R},\mathcal{T}_{\mathbb{R}})$ with the property that $f\circ f=cos$. Then we know by our second result that $f(\alpha)=\alpha$ and $f|_{[0;\frac{\pi}{2}]}$ is an injection. Since $f$ is continuous, $f|_{[0;\frac{\pi}{2}]}$ must be a continuous injection. By our third result $f|_{[0;\frac{\pi}{2}]}$ is strictly monotone. Since $f(\alpha)=\alpha\in]0;1[\subset [0;\frac{\pi}{2}]$, and $f|_{[0;\frac{\pi}{2}]}$ is continuous we have that $\alpha\in (f|_{[0;\frac{\pi}{2}]})^{-1}\big[]0;1[\big]=:U\in\mathcal{T}_{[0;\frac{\pi}{2}]}^{\mathbb{R}}$. In this case, the composition $f\circ f$ must be strictly increasing over $U$; for if $x,y\in U\subset [0;\frac{\pi}{2}]$ with $x<y$ then by construction of $U$ we have $f(x),f(y)\in [0;\frac{\pi}{2}]$ (important). Now by the strict monotonicity of $f|_{[0;\frac{\pi}{2}]}$, we have two cases. If $f|_{[0;\frac{\pi}{2}]}$ is strictly increasing then $f(x)<f(y)$ so that again we have $f(f(x))<f(f(y))$. If $f|_{[0;\frac{\pi}{2}]}$ is strictly decreasing then $f(x)>f(y)$ and so $f(f(x))<f(f(y))$. In all case $(f\circ f)(x)<(f\circ f)(y)$. Therefore $cos|_U=(f\circ f)|_U$ is strictly increasing. This is a contradiction with the fact that $cos$ is strictly decreasing over $[0;\frac{\pi}{2}]\supset U$ \textbf{if} $U$ contains at least $2$ elements. The latter is true: by construction $U$ is of the form $[0;\frac{\pi}{2}]\cap V$ with $V$ an open set of $\mathbb{R}$, in particular (and by construction of $\mathcal{T}_{\mathbb{R}}$) $V$ contains a basis element (which is an open interval $]c,d[$ of positive length) containing $\alpha$. Therefore:
+$$\alpha\in ]c,d[\cap]0;1[\subset]c,d[\cap[0;\frac{\pi}{2}]\subset U$$
+so $\varnothing\subsetneq[\alpha;min\{d,1\}[\subset U$, and $U$ necessarily contains infinitely many points.
+\\\\
+\textit{Remark:} If $f$ was differentiable at $\alpha=f(\alpha)$ then the third part would be much easier. Indeed :
+$$0\overset{\alpha\in]0;1[}{>}-sin(\alpha)=(\frac{d}{dx}cos)(\alpha)=(\frac{d}{dx}f\circ f)(\alpha)=(\frac{d}{dx}f)(f(\alpha))\cdot(\frac{d}{dx}f)(\alpha)=(\frac{d}{dx}f)(\alpha)^{2}\geq 0$$
+a contradiction.
+\newpage
+\problem[Problem B4 (Putnam 2001)]
+Let \( S \) denote the set of rational numbers different from \(\{-1, 0, 1\}\). Define \( f : S \to S \) by  
+\( f(x) = x - \frac{1}{x} \). Prove or disprove that  
+
+\[
+\bigcap_{n=1}^{\infty} f^{(n)}(S) = \emptyset,
+\]
+
+where \( f^{(n)} \) denotes \( f \) composed with itself \( n \) times.
+\solution[Solution:] 
+The intersection is empty. To see this, analyze the behavior of denominators under iteration of \( f \). Let \( x = \frac{m}{n} \in S \), where \( m, n \) are coprime integers. Applying \( f \):
+
+\[
+f\left(\frac{m}{n}\right) = \frac{m}{n} - \frac{n}{m} = \frac{m^2 - n^2}{mn}.
+\]
+
+Since \( \gcd(m^2 - n^2, mn) = 1 \) (as \( m, n \) are coprime), the denominator becomes \( |mn| \). For \( m \neq 1 \), \( |mn| \geq 2|n| \). If \( m = 1 \), then \( f\left(\frac{1}{n}\right) = \frac{1 - n^2}{n} \), and since \( n \neq \pm 1 \), the numerator \( |1 - n^2| \geq 3 \). 
+
+Iterating \( f \), the denominator grows at least exponentially. Specifically:
+\begin{itemize}
+    \item For \( x \in S \), if the denominator of \( f^{(k)}(x) \) is \( d_k \), then \( d_{k+1} \geq 2d_k \).
+    \item Thus, \( d_k \geq 2^k d_0 \), where \( d_0 \) is the initial denominator.
+\end{itemize}
+
+For any rational \( x = \frac{a}{b} \) (in reduced form), choose \( k \) such that \( 2^k > b \). Then \( d_k > b \), so \( x \notin f^{(k)}(S) \). Hence, \( x \) cannot belong to \( \bigcap_{n=1}^{\infty} f^{(n)}(S) \). Since \( x \) was arbitrary, the intersection is empty.
+
+\newpage
+\problem[Problem (Hongler)]
+12. On a une liste chaînée d'éléments, $x_{0}, x_{1}, \ldots, x_{n}$, où on ne connaît pas $n$ (mais on sait que la liste est finie). Quand on est à $x_{0}$ on a un pointeur pour aller à $x_{1}$, qui amène à $x_{2}$, etc, jusqu'au moment où on arrive à $x_{n}$, où on apprend que c'est la fin. On a une quantité de mémoire bornée (on peut pas juste stocker toute la liste dans un tableau et choisir un élément dans la tableau quand on est arrivé à la fin).\\
+(a) Comment prendre un élément aléatoire dans la liste, uniformément si on a le droit de parcourir la liste une seule fois?\\
+(b) Pourquoi est-ce que résoudre ce problème peut être utile en pratique ?\\
+13. On a 100 mathématiciens emprisonnés dans une salle. Ils ont été capturés par un sorcier qui va les soumettre à l'épreuve suivante.
+\solution[Solution:]
+
+\newpage
+\problem[Problem (Hongler)]
+ Let \( U \) be a domain such that \( U \supseteq \mathbb{D} \) and \( f \) a holomorphic function \( U \to \mathbb{C} \). Show that if \( f(\partial \mathbb{D}) = \gamma \) is a simple loop and \( f|_{\partial \mathbb{D}} : \partial \mathbb{D} \to \gamma \) is injective, then \( f|_{\mathbb{D}} \) is injective. 
+
+\solution[Solution:]
+\end{document}

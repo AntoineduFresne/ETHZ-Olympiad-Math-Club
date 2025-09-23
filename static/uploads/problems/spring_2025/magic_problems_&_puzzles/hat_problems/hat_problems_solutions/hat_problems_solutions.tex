@@ -1,0 +1,668 @@
+\documentclass[11pt, a4paper, oneside]{article}
+
+% ===== Page Layout =====
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{microtype}  % Improved text justification
+
+% ===== Fonts & Encoding =====
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+
+% ===== Math Packages =====
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{tensor}
+\usepackage{mathtools}
+
+% ===== Graphics & Diagrams =====
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{pst-node}
+
+% ===== Bibliography =====
+\usepackage{biblatex}
+\addbibresource{references.bib}  % Uncomment and add your .bib file
+
+% ===== Tables =====
+\usepackage{makecell}
+
+% ===== Colors =====
+\usepackage{xcolor}
+\definecolor{linkcolour}{rgb}{0.5,0,0}  % Dark red color for links
+
+% ===== Hyperlinks =====
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    breaklinks,
+    urlcolor=linkcolour, 
+    linkcolor=linkcolour,
+    citecolor=linkcolour
+}
+
+% ===== Custom Commands =====
+\newcommand{\problem}[1][]{\section{#1} \hfill \par}
+\newcommand{\solution}[1][]{\subsection*{#1}\hfill \par}
+
+% ===== Theorem Environments =====
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{lemma}
+\newtheorem*{lemma}{Lemma}
+
+% ===== Text Highlighting =====
+\usepackage{soul}
+\newcommand\ba[1]{\setbox0=\hbox{$#1$}%
+\rlap{\raisebox{.45\ht0}{\textcolor{linkcolour}{\rule{\wd0}{1pt}}}}#1} 
+\def\bc#1{\textcolor{linkcolour}{BC note: {#1}}}
+\def\b#1{\textcolor{linkcolour}{{#1}}}
+
+% ===== Comment Environment =====
+\usepackage{comment}
+\begin{comment}
+Useful LaTeX fonts:
+\usepackage{mathptmx}
+\usepackage{txfonts}
+\usepackage{pxfonts}
+\usepackage{mathpazo}
+\usepackage{mathpple}
+\usepackage{kmath,kerkis}
+\usepackage{kurier}
+\usepackage{arev}
+\usepackage{euler}
+\usepackage{eulervm}
+\end{comment}
+
+\title{Hat Problems Solutions}
+\author{ETHZ Math Olympiad Club}
+\date{5 May 2025}
+\begin{document}
+\maketitle
+\problem[Hat Problems (Unknown)]
+\begin{quote}
+\textit{A mathematician is a blind man in a dark room looking for a black hat which isn’t there.}
+\hfill — Charles Darwin
+\end{quote}
+In mathematical folklore, there is a long tradition of hat problems. Typically, a group of logicians or mathematicians (or, for some odd reason, gnomes) each wears a hat. They are able to see at least some of the other participants' hats, but not their own. Each player then guesses the colour of \textit{his} own hat, and they all win or lose collectively based on the quality of their guesses. At first glance, it often seems impossible for the participants to win consistently: how should the colour of the other hats help me guess my own? Nonetheless, it is often possible to do surprisingly well. We refer to the book \cite{hardin2013mathematics} for the history and many results on hat problems.
+\\\\
+The following proposed problems deal with different kinds of hat problems, all considered in countable settings (both the number of mathematicians and the number of colours are countable). The problems ask for the existence of a \textit{strategy} that the mathematicians can use to guess a colour and that should verify some winning property. We let \( \left(1 \leq C \leq \aleph_0\right) \) be the set of colours and \( \left(1 \leq N \leq \aleph_0\right) \) be the set of mathematicians. Of course, one can generalise these games to increase the number of guesses per participant, allow simultaneous or recursive guessing, permit whispering or shouting, or vary how many other hats each mathematician can see, or even to permit uncountable cardinals (but they require one to know the notions of \textit{ordinals} and \textit{cardinals}),
+\\\\
+The finite problems do not require any advanced mathematics, whereas the countably infinite versions require a bit more machinery, which should be manageable if one has studied naïve set theory up to the Axiom of Choice (\textbf{AC})\footnote{An equivalent form of (\textbf{AC}) is that every collection of non-empty sets has a choice function:
+\[
+\forall X \left[\left(\forall Y \in X\, \exists z \in Y\right) \to \exists f: X \to \bigcup X \text{ such that } \forall Y \in X,\; f\left(Y\right) \in Y\right].
+\]}. For more general results, we advise those familiar with ordinal and cardinal arithmetic to consult the paper \cite{lietz2024infinite}.
+\\\\
+The players are placed in a finite or infinite line, or in a room sufficiently large. However, we leave the exact logistics of the realisation of these hat games to the imagination of the reader. In the finite case, we assume the players can do anything \textit{finite} (store any finite set, use any finite functions, \ldots). In the infinite case, we assume that each player has a memory capable of storing finitely many sets of cardinality at most \( 2^{\aleph_0} = \left|\mathcal{P}\left(\aleph_0\right)\right| \) and that each of them has perfect eyesight with infinite resolution (or simply that he knows the colour of each mathematician for each permitted index). We also assume, furthermore, that the players have access to the Axiom of Choice (\textbf{AC}) and that the players can use on their own any function that they can store.
+
+\subsection{}
+Consider \( 1 \leq N < \aleph_0 \) mathematicians standing in a room and \( 2 \leq C \leq \aleph_0 \) colours. Each mathematician wears a hat whose colour is chosen from the set \( C \). Moreover, each mathematician sees the colours of all the other hats, but not his own. Assume the mathematicians are already ordered, i.e., each is assigned a distinct index \( i \in N \).
+\\\\
+The game consists of mathematician \( 0 \) shouting \textit{only} a colour (a number) in \( C \) as a guess of his own hat colour (we assume everyone hears it). Then, \textbf{simultaneously}, all other mathematicians \( 1 \leq i < N \) shout a colour in \( C \), as their guess of their own hat colour.
+\\\\
+Before the game starts and the hats are placed on their heads, the mathematicians can devise a strategy (they are aware of $C$, $N$ and the index they are attributed).
+
+How can they ensure that they are all wrong or all correct?
+
+\solution[Solution:]
+For both the problem and its bonus, a hat colouring configuration is represented by \( \mathbf{c} \in C^{N} \) and a strategy here consists of an $N$-tuple $\mathbf{f} = \left( f_i \right)_{i \in N}$, where
+\[
+f_0: C^{N \setminus \left\{ 0 \right\}} \to C
+\]
+is a function that mathematician $0$ can apply to any possible outcome \(\omega \in C^{N \setminus \left\{ 0 \right\}}\) he can see, and for each \(i \in N \setminus \left\{ 0 \right\}\),
+\[
+f_i: C^{N \setminus \left\{ i \right\}} \times C \to C
+\]
+is a function that mathematician \(i \in N \setminus \left\{ 0 \right\}\) can apply to any possible outcome
+\[
+\left( \omega, \gamma \right) \in C^{N \setminus \left\{ i \right\}} \times C
+\]
+he can sense: the part he sees, \(\omega \in C^{N \setminus \left\{ i \right\}}\), and the part he hears, \(\gamma \in C\), from the first mathematician \(0\). Any such \(N\)-tuple of functions \(\mathbf{f}\) induces a guess function \(\mathbf{G}_{\mathbf{f}}: C^N \to C^N\), defined for \(\mathbf{c} \in C^N\) by:
+\[
+\mathbf{G}_{\mathbf{f}}\left( \mathbf{c} \right)(0) := f_0 \left( \left. \mathbf{c} \right|_{N \setminus \left\{ 0 \right\}} \right), \quad \text{and} \quad \forall i \in N_{>0}, \ \mathbf{G}_{\mathbf{f}}\left( \mathbf{c} \right)(i) := f_i \left( \left( \left. \mathbf{c} \right|_{N \setminus \left\{ i \right\}}, f_0 \left( \left. \mathbf{c} \right|_{N \setminus \left\{ 0 \right\}} \right) \right) \right).
+\]
+The winning property for this strategy \(\mathbf{f}\) is that, for any hat colour configuration \(\mathbf{c} \in C^N\), we have either \(\mathbf{G}_{\mathbf{f}} \left( \mathbf{c} \right) = \mathbf{c}\) or \(\forall i \in N,\, \mathbf{G}_{\mathbf{f}} \left( \mathbf{c} \right)(i) \neq \mathbf{c}(i)\) — that is, they are either all correct or all wrong.
+\\\\
+If \(N = 1\), the strategy of the mathematician consists of shouting any colour (trivial case). Any function \(f_0: C^{\varnothing} \to C\) is such that \(\mathbf{f} := \left( f_i \right)_{i \in N}\) is winning.
+\\\\
+If \(N \geq 2\), the mathematicians can employ the following strategy to ensure that all are wrong or all are correct:
+\\\\
+The first mathematician \(0\) looks at the sum of the colours he sees in the set formed by the remaining mathematicians \(\left\{ j \mid 1 \leq j \leq N - 1 \right\}\). It is clear that this sum can be uniquely written as \(qC + r\) for \(q \in \mathbb{N}\) and \(r \in C\) (for \(2 \leq C < \aleph_0\), it is the common Euclidean division, and when \(C = \aleph_0\), this is also valid since \(0 \cdot \aleph_0 = 0\) and \(r \in \aleph_0 = C\)). So mathematician \(0\) shouts \(r \in C\). Although mathematician \(0\) may guess incorrectly (this is inevitable), each mathematician \(1 \leq j \leq N - 1\), who sees everyone except himself, compares this label with the similar label obtained from the sum of the colours he observes (excluding the first mathematician). With this comparison, he can determine his own hat colour. Moreover, since he can see the first mathematician, he knows whether the latter's guess was correct or not by chance. Thus, each of them knows his own hat colour and whether the first mathematician was correct. Consequently, they simultaneously shout their respective hat colours if the first mathematician was correct; otherwise, they shout another colour if he was incorrect.
+\\\\
+Mathematically, we see \(\mathbb{N} \subset \mathbb{Z}\), and we let (as discussed) the unique function \(r_{C} : \mathbb{Z} \rightarrow C\) that satisfy \(\forall a \in \mathbb{Z}\, \exists! q \in \mathbb{Z}\) with \(a = qC + r_{C}(a)\). Trivially, if \(2 \leq C < \aleph_0\), then this is the remainder of the Euclidean division, whereas if \(C = \aleph_0\), then \(r_C = \operatorname{id}_{\mathbb{Z}}\). In all cases, \(r_C\) has the property that \(r_{C}\big|_{C} = \operatorname{id}_{C}\), and for \(a, b, c, d \in \mathbb{Z}\):
+\[
+r_{C}\left( a r_{C}\left( b \right) + c r_{C}\left( d \right) \right) = r_{C}\left( ab + cd \right).
+\]
+The last property extends (by induction) to any finite sum and nesting of \( r_{C} \).
+\\\\
+Let furthermore \(\mathbf{c} \in C^N\) be a hat colouring configuration in order of the mathematicians’ indices. Then each mathematician \(i \in N\) knows:
+\begin{itemize}
+    \item The partial sequence \(\mathbf{c} \setminus \left\{ \left( i, \mathbf{c}(i) \right) \right\}\); in particular, he observes the label
+    \[
+    l_i := r_{C}\left( \sum_{k \in N \setminus \left\{ i, 0 \right\}} \mathbf{c}(k) \right) \in C.
+    \]
+\end{itemize}
+After the first mathematician shouts \(l_0 \in C\), each mathematician \(1 \leq j \leq N - 1\) knows furthermore:
+\begin{itemize}
+    \item \(l_0\), corresponding to the entire group of mathematicians \(\left\{ 1 \leq j' \leq N - 1 \right\}\), to which he belongs.
+    \item The Boolean bit \(\theta := \mathbbm{1}_{\left\{ 0 \right\}}\left( l_0 - \mathbf{c}(0) \right) \in \left\{ 0, 1 \right\}\) (since he sees \(\mathbf{c}(0)\)), indicating whether the first mathematician \(0\) guessed his colour correctly (\(\theta = 1\)) or not (\(\theta = 0\)).
+\end{itemize}
+Based on this, he can compute \(\tilde{l}_j := r_{C}\left( l_0 - l_j \right)\), which, by the property of \(r_C\), is equal to:
+\[
+\tilde{l}_j = r_{C}\left( l_0 - l_j \right) = r_{C}\left( \sum_{k' \in N \setminus \left\{ 0 \right\}} \mathbf{c}(k') - \sum_{k \in N \setminus \left\{ j, 0 \right\}} \mathbf{c}(k) \right) = r_{C}\left( \mathbf{c}(j) \right) = \mathbf{c}(j).
+\]
+Therefore, mathematician \(j\) knows his hat colour.
+\\\\
+Simultaneously, based on \(\theta\), each of the mathematicians \(1 \leq j' < N\) shouts \(\tilde{l}_{j'}\) if \(\theta = 1\); otherwise, they shout another colour (for example, \(\tilde{l}_{j'} \neq r_{C}\left( \tilde{l}_{j'} + 1 \right) \in C\)). This guarantees that, in the end, they are either all wrong or all correct.
+\\\\
+Formally, our discussion permits us to design the following example of a winning strategy for the mathematicians. Let \(\mathbf{f} := \left( f_i \right)_{i \in N}\), where \(f_0 : C^{N \setminus \left\{ 0 \right\}} \rightarrow C\) is defined for \(\omega \in C^{N \setminus \left\{ 0 \right\}}\) by
+\[
+f_0\left( \omega \right) := r_{C}\left( \sum_{k \in \operatorname{dom}\left( \omega \right)} \omega\left( k \right) \right),
+\]
+and for each \(i \in N_{>0}\), \(f_i : C^{N \setminus \left\{ i \right\}} \times C \rightarrow C\) is defined for \(\left( \omega, \gamma \right) \in C^{N \setminus \left\{ i \right\}} \times C\) by:
+\begin{align*}
+f_i\left( \left( \omega, \gamma \right) \right) :=\;& 
+r_{C} \left( \gamma - \left( \sum_{k \in \operatorname{dom}\left( \omega \right) \setminus \left\{ 0 \right\}} \omega\left( k \right) \right) \right) \mathbbm{1}_{\left\{ 0 \right\}}\left( \gamma - \omega\left( 0 \right) \right) \\
+&+ r_{C} \left( \gamma - \left( \sum_{k \in \operatorname{dom}\left( \omega \right) \setminus \left\{ 0 \right\}} \omega\left( k \right) \right) + 1 \right) \mathbbm{1}_{\mathbb{Z} \setminus \left\{ 0 \right\}}\left( \gamma - \omega\left( 0 \right) \right),
+\end{align*}
+then \(\mathbf{f}\) is winning.
+\\\\
+It is clear that \(\mathbf{f}\) requires finite storage when \(1 \leq N < \aleph_0\) and \(2 \leq C < \aleph_0\). However, if \(1 \leq N < \aleph_0\) and \(C = \aleph_0\), then \(\mathbf{f}\) requires the storage by each mathematician \(i\) of \(f_i\), which is of size \(\left| f_i \right| = \aleph_0 < 2^{\aleph_0}\).
+\\\\
+\textbf{Bonus:} Solve the same problem when there are \( N = \aleph_0 \) mathematicians.
+\solution[Solution:]
+The key idea is to use the fact that the mathematicians possess infinite memory (capable of storing finitely many sets of cardinality up to \( 2^{\aleph_0} \)), can see infinitely far, can apply the axiom of choice, and can access individually any function they are capable of storing.
+\\\\
+They collectively choose a representative for each equivalence class of sequences in \( C^{\mathbb{N}} \) that differ in only finitely many positions. They pre-agree on these representatives (a set of size \( 2^{\aleph_0} \)) and store them in memory (technically, they store the entire choice function). When the game begins, there is a true hat-colour configuration. Each mathematician, who can see everyone except himself, has an incomplete hat-colouring sequence in his mind. Each of them extends his view (for instance, by appending a zero according to his index) and uses the pre-agreed choice function to select the representative of the corresponding equivalence class (that is, the equivalence class of the extended observed sequence). By construction of the choice function, this representative differs from the true hat configuration in only finitely many positions. Moreover, since each unseen part (his own hat) is finite, and they all use the same choice function, all mathematicians obtain the same representative for the equivalence class of the true hat configuration.
+\\\\
+For a hat-colour configuration \( \mathbf{c} \in C^{\mathbb{N}} \), each mathematician \( i \in \mathbb{N} \) is able to observe the finite subset \( E_i \subset \mathbb{N} \setminus \left\{ 0, i \right\} \) consisting of all the indices in \( \mathbb{N} \) (except the indices \( i \) and \( 0 \)) for which \( \mathbf{c} \) does not agree with its representative. Reducing the problem in this way (for any number of colours \( 2 \leq C \leq \aleph_0 \)) was the most important part.
+\\\\
+They can now use (if we view \( \mathbb{N} \subset \mathbb{Z} \)) the same unique function \( r_C : \mathbb{Z} \rightarrow C \) as in the previous problem. At the start of the game, there is a true hat configuration \( \mathbf{t} \in C^{\mathbb{N}} \), and all mathematicians know the same representative \( \mathbf{s} \) of the true hat configuration. The first mathematician shouts a label of the hat-colouring sequence \( \left. \mathbf{t} \right|_{\mathbb{N}_{>0}} \in C^{\mathbb{N}_{>0}} \) he sees with a number in \( C \), by passing as an argument to \( r_C \) the sum of the images of \( \left.\left( \mathbf{t} - \mathbf{s} \right) \right|_{E_0} \). While he may guess incorrectly (this is inevitable), each mathematician \( 1 \leq j < \aleph_0 \), who sees everyone except himself, compares this label with the analogous label obtained by also passing as an argument to \( r_C \) the sum of the colours he observes in his truncated part \( \left.\left( \mathbf{t} - \mathbf{s} \right) \right|_{E_j} \). With this comparison, he can determine his own hat colour. Moreover, since he can see the first mathematician, he knows whether the latter’s guess was right or wrong by chance. Thus, each of them knows his own hat colour and whether the first mathematician was correct. Consequently, they simultaneously shout their respective hat colours if the first mathematician was correct; otherwise, they shout a different colour if he was incorrect.
+\\\\
+Mathematically, let us define a relation for a fixed \( 2 \leq C \leq \aleph_0 \):
+\[
+\sim\,:= \left\{ \left( \mathbf{c}, \mathbf{c}' \right) \in C^{\mathbb{N}} \times C^{\mathbb{N}} \,\middle|\, \left| \operatorname{supp} \left( \mathbf{c} - \mathbf{c}' \right) \right| < \aleph_0 \right\} \subset C^{\mathbb{N}} \times C^{\mathbb{N}},
+\]
+where, for a function \( f \) with range in \( \mathbb{N} \), the set-theoretic support of \( f \) is defined as
+\[
+\operatorname{supp} \left( f \right) = \left\{ x \in \operatorname{dom} \left( f \right) \,\middle|\, f(x) \neq 0 \right\}.
+\]
+Clearly, \( \sim \) is an equivalence relation, and two sequences are equivalent if and only if they differ at finitely many positions. Equivalently, two sequences are equivalent if and only if they are eventually the same. Now, by the Axiom of Choice, there exists a function
+\[
+\chi \colon C^{\mathbb{N}} / {\sim} \hookrightarrow \bigcup C^{\mathbb{N}} / {\sim}
+\]
+satisfying \( \forall \mathbf{c} \in C^{\mathbb{N}}, \chi\left( \left[ \mathbf{c} \right]_{\sim} \right) \in \left[ \mathbf{c} \right]_{\sim} \). All mathematicians collectively use the same choice function \( \chi \) to select the same representative of each equivalence class.
+\\\\
+This choice function \( \chi \) requires \( \left| \chi \right| = 2^{\aleph_0} \) storage capacity, since:
+\[
+2^{\aleph_0} \overset{\text{classic}}{\simeq} C^{\mathbb{N}} = \bigsqcup C^{\mathbb{N}} /_{\sim} = \bigsqcup_{\mathbf{c} \in \operatorname{ran} \left( \chi \right)} \left[ \mathbf{c} \right]_{\sim} \simeq \bigsqcup_{\mathbf{c} \in \operatorname{ran} \left( \chi \right)} \left\{ \mathbf{c} \right\} \times \left[ \mathbf{c} \right]_{\sim}
+\]
+\[
+\overset{ \left| \left[ \mathbf{c} \right]_{\sim} \right| = \aleph_0 }{\simeq} \bigsqcup_{\mathbf{c} \in \operatorname{ran} \left( \chi \right)} \left\{ \mathbf{c} \right\} \times \aleph_0 = \operatorname{ran} \left( \chi \right) \times \aleph_0 \simeq \left| \operatorname{ran} \left( \chi \right) \times \aleph_0 \right| = \max \left\{ \left| \operatorname{ran} \left( \chi \right) \right|, \aleph_0 \right\}.
+\]
+For all \( i \in \mathbb{N} \), there is a function
+\[
+\chi^{i} \colon C^{\mathbb{N} \setminus \left\{ i \right\}} \rightarrow C^{\mathbb{N}}
+\]
+defined for \( \mathbf{c} \in C^{\mathbb{N} \setminus \left\{ i \right\}} \) by
+\[
+\chi^{i} \left( \mathbf{c} \right) := \chi \left( \left[ \left\{ \left( i, 0 \right) \right\} \cup \mathbf{c} \right]_{\sim} \right).
+\]
+That is, the choice function used to select the representative of the equivalence class of the extended observed sequence by mathematician \( i \) (he chooses to extend by \( 0 \) at his index $i$, but by the definition of \( \chi \), this is independent of that choice). There is also the function
+\[
+\operatorname{E}_{\chi, i} \colon C^{\mathbb{N} \setminus \left\{ i \right\}} \rightarrow \mathscr{P}_{\mathrm{fin}} \left( \mathbb{N} \setminus \left\{ 0, i \right\} \right)
+\]
+defined for \( \mathbf{c} \in C^{\mathbb{N} \setminus \left\{ i \right\}} \) by
+\[
+\operatorname{E}_{\chi, i} \left( \mathbf{c} \right) := \left\{ k \in \mathbb{N} \setminus \left\{ 0, i \right\} \,\middle|\, \mathbf{c}(k) \neq \chi^{i} \left( \mathbf{c} \right)(k) \right\}.
+\]
+This is the function that returns the finite subset consisting of all the indices in \( \mathbb{N} \) (except the indices \( i \) and \( 0 \)) for which \( \mathbf{c} \) does not agree with its representative of any of its extension. It is clear that each \( \operatorname{E}_{\chi, i} \) requires \( \left| \operatorname{E}_{\chi, i} \right| = 2^{\aleph_0} \) storage capacity. Before the game begins, each mathematician \( i < \aleph_0 \) stores \( \chi \) and \( \operatorname{E}_{\chi, i} \).
+\\\\
+When the game begins, there is a sequence \(\mathbf{t} \in C^{\mathbb{N}}\) representing the hat colour configuration in order of the mathematicians’ indices. Each mathematician \(i \in N = \aleph_0 = \mathbb{N}\) can observe only the partial sequence \(\left.\mathbf{t}\right|_{\mathbb{N} \setminus \left\{i\right\}}\), from which he constructs an extension (say, as before, by appending one zero at index \(i\)):
+\[
+\mathbf{t}_i := \left\{\left(i, 0\right)\right\} \cup \left.\mathbf{t}\right|_{\mathbb{N} \setminus \left\{i\right\}}.
+\]
+He then computes \(\chi\left(\left[\mathbf{t}_i\right]_{\sim}\right) = \chi^{i}\left(\left.\mathbf{t}\right|_{\mathbb{N} \setminus \left\{i\right\}}\right)\) using the same shared choice function \(\chi\). For all \(j \in \mathbb{N}\), the support condition:
+\[
+\left|\operatorname{supp}\left(\mathbf{t}_i - \mathbf{t}_j\right)\right| \leq 2 < \aleph_0
+\]
+implies \(\mathbf{t}_i \sim \mathbf{t}_j\). The well-definedness of \(\chi\) enforces:
+\[
+\chi\left(\left[\mathbf{t}_i\right]_{\sim}\right) = \chi\left(\left[\mathbf{t}_j\right]_{\sim}\right),
+\]
+yielding a unique representative sequence \(\mathbf{s}\) satisfying \(\mathbf{t}_j \sim \mathbf{s}\) for all \(j \in \mathbb{N}\) (since \(\mathbf{s} = \chi\left(\left[\mathbf{t}_j\right]_{\sim}\right) \in \left[\mathbf{t}_j\right]_{\sim}\)). Furthermore, since:
+\[
+\left|\operatorname{supp}\left(\mathbf{t} - \mathbf{t}_i\right)\right| \leq 1 < \aleph_0,
+\]
+we have \(\mathbf{t} \sim \mathbf{t}_i\). By the transitivity of \(\sim\), it follows that \(\mathbf{t} \sim \mathbf{s}\). Thus, the chosen sequence \(\mathbf{s}\) differs from \(\mathbf{t}\) at only finitely many positions, and all mathematicians \(i \in \mathbb{N}\) know the same sequence \(\chi\left(\left[\mathbf{t}_i\right]_{\sim}\right) = \mathbf{s}\). Notice that \(E_i := \operatorname{E}_{\chi, i}\left(\left.\mathbf{t}\right|_{\mathbb{N} \setminus \left\{i\right\}}\right)\) satisfies \(E_i = \left\{k \in \mathbb{N} \setminus \left\{0, i\right\} \mid \mathbf{t}(k) \neq \mathbf{s}(k)\right\}\). In particular, we crucially have \(E_i \subset E_0 \subset E_i \cup \left\{i\right\}\).
+\\\\
+Hence, each mathematician \(i \in N = \mathbb{N}\) knows:
+\begin{itemize}
+    \item The partial sequence \(\mathbf{t} \setminus \left\{\left(i, \mathbf{t}(i)\right)\right\}\) and the same representative \(\mathbf{s}\) of any of its extensions.
+    \item \(E_i\); in particular, he observes the label
+    \[
+    l_i := r_{C}\left(\sum_{k \in E_i} \left(\mathbf{t} - \mathbf{s}\right)(k)\right) \in C.
+    \]
+\end{itemize}
+After the first mathematician shouts \(l_0 \in C\), each mathematician \(1 \leq j < N = \aleph_0\) knows, furthermore:
+\begin{itemize}
+    \item \(l_0 \in C\).
+    \item The Boolean bit \(\theta := \mathbbm{1}_{\left\{0\right\}}\left(l_0 - \mathbf{t}(0)\right) \in \left\{0, 1\right\}\) (since he sees \(\mathbf{c}(0)\)), indicating whether the first mathematician \(0\) guessed his colour correctly (\(\theta = 1\)) or not (\(\theta = 0\)).
+\end{itemize}
+Based on this, he can compute:
+\[
+\tilde{l}_j := r_{C}\left(\mathbf{s}(j) + l_0 - l_j\right)
+\]
+We claim that \(\tilde{l}_j = \mathbf{t}(j)\). Indeed,
+\\\\
+If \(l_0 \neq l_j\), then necessarily \(E_0 = E_j \cup \left\{j\right\}\) (since the other possibility \(E_0 = E_j\) implies \(l_0 = l_j\)), and by the properties of \(r_C\), this means:
+\[
+\tilde{l}_j = r_{C}\left(\mathbf{s}(j) + l_0 - l_j\right) = r_{C}\left(\mathbf{s}(j) + \sum_{k' \in E_0} \left(\mathbf{t} - \mathbf{s}\right)(k') - \sum_{k \in E_j} \left(\mathbf{t} - \mathbf{s}\right)(k)\right)
+\]
+\[
+= r_{C}\left(\mathbf{s}(j) + \left(\mathbf{t} - \mathbf{s}\right)(j)\right) = r_{C}\left(\mathbf{t}(j)\right) = \mathbf{t}(j).
+\]
+\\\\
+If \(l_0 = l_j\), then \(E_0 = E_j \cup \left\{j\right\}\) cannot occur so that the other possibility $E_0=E_j$ must happens. Indeed, if that were the case, then \(j \in E_0\), and so \(\mathbf{t}(j) \neq \mathbf{s}(j)\). However, by the properties of \(r_C\), this implies:
+\[
+0 = r_{C}(0) = r_{C}\left(l_0 - l_j\right) = r_{C}\left(\sum_{k' \in E_0} \left(\mathbf{t} - \mathbf{s}\right)(k') - \sum_{k \in E_j} \left(\mathbf{t} - \mathbf{s}\right)(k)\right) = r_{C}\left(\left(\mathbf{t} - \mathbf{s}\right)(j)\right),
+\]
+i.e. \(0 = r_{C}\left(\left(\mathbf{t} - \mathbf{s}\right)(j)\right)\). If \(C = \aleph_0\), then \(0 = \left(\mathbf{t} - \mathbf{s}\right)(j)\), i.e. \(\mathbf{t}(j) = \mathbf{s}(j)\). While if \(2 \leq C < \aleph_0\), then \(\left(\mathbf{t} - \mathbf{s}\right)(j) = qC\) for some \(q \in \mathbb{Z}\), but as \(-C < \left(\mathbf{t} - \mathbf{s}\right)(j) < C\) (since \(\mathbf{t}(j), \mathbf{s}(j) \in C\)), we have \(q = 0\), so \(\mathbf{t}(j) = \mathbf{s}(j)\). In all cases, \(\mathbf{t}(j) = \mathbf{s}(j)\), contradicting \(j \in E_0\). So, if \(l_0 = l_j\), then \(E_j = E_0\) which implies \(j \notin E_0\), i.e. \(\mathbf{s}(j) = \mathbf{t}(j)\). Hence, \[\tilde{l}_j = r_{C}\left(\mathbf{s}(j) + 0\right) = r_{C}\left(\mathbf{s}(j)\right)=\mathbf{s}(j)=\mathbf{t}(j).\]
+In all cases, this shows that \(\tilde{l}_j = \mathbf{t}(j)\), so he knows his hat colour through the computation \(\tilde{l}_j\).
+\\\\
+Simultaneously, based on \(\theta\), each of the mathematicians \(1 \leq j' < N = \aleph_0\) shouts \(\tilde{l}_{j'}\) if \(\theta = 1\); otherwise, he shouts another colour (for example, \(\tilde{l}_{j'} \neq r_{C}\left(\tilde{l}_{j'} + 1\right) \in C\)). This guarantees that, in the end, they are either all wrong or all correct.
+\\\\
+Formally, our discussion permits us to design the following example of a winning strategy for the mathematicians. Let \( \mathbf{f} := \left( f_i \right)_{i \in N} \), where \( f_0 : C^{N \setminus \left\{ 0 \right\}} \rightarrow C \) is defined for \( \omega \in C^{N \setminus \left\{ 0 \right\}} \) by
+\[
+f_0\left( \omega \right) := r_{C}\left( \sum_{k \in \operatorname{E}_{\chi,0}(\omega)} \left( \omega - \chi^{0}\left( \omega \right) \right)\left( k \right) \right),
+\]
+and for each \( i \in N_{>0} \), let \( f_i : C^{N \setminus \left\{ i \right\}} \times C \rightarrow C \) be defined for \( \left( \omega, \gamma \right) \in C^{N \setminus \left\{ i \right\}} \times C \) by:
+\begin{align*}
+f_i\left( \left( \omega, \gamma \right) \right) :=\,& 
+ r_{C} \left( \chi^{i}\left( \omega \right)\left( i \right) + \gamma - \left( \sum_{k \in \operatorname{E}_{\chi,i}(\omega)} \left( \omega - \chi^{i}\left( \omega \right) \right)\left( k \right) \right) \right) \mathbbm{1}_{\left\{ 0 \right\}} \left( \gamma - \omega\left( 0 \right) \right) \\
+& +  r_{C} \left( \chi^{i}\left( \omega \right)\left( i \right) + \gamma - \left( \sum_{k \in \operatorname{E}_{\chi,i}(\omega)} \left( \omega - \chi^{i}\left( \omega \right) \right)\left( k \right) \right) + 1 \right) \mathbbm{1}_{\mathbb{Z} \setminus \left\{ 0 \right\}} \left( \gamma - \omega\left( 0 \right) \right),
+\end{align*}
+then \( \mathbf{f} \) is winning.
+\\\\
+It is clear that \( \mathbf{f} \) requires the storage, for each mathematician \( i \), of \( f_i \), which is of size \( \left| f_i \right| = 2^{\aleph_0} \).
+\begin{remark}
+In fact, the above strategy works for any \( 1 \leq N \leq \aleph_0 \) \textit{mutatis mutandis}, but in the case \( 1 \leq N < \aleph_0 \), \( \sim \) is then easily seen to be the equivalence relation in which everything is equivalent to everything. A choice function is thus any function
+\[
+\chi : C^{N} /_{\sim} = \left\{ C^{N} \right\} \rightarrow C^{N},
+\]
+which in this case does not require the axiom of choice, as it is defined on a singleton. Thus, we have in fact found (with possibly only trivial modifications) a global strategy (with the storage requirement) for any number of mathematicians \( 1 \leq N \leq \aleph_0 \) and any number of colours \( 2 \leq C \leq \aleph_0 \)!
+\end{remark}
+
+
+\newpage
+\subsection{}
+Consider \( 1 \leq N < \aleph_0 \) mathematicians standing in a line and \( 2 \leq C \leq \aleph_0 \) colours. Each mathematician wears a hat whose colour is chosen from the set \( C \). Moreover, each mathematician can see the hat colours of all the mathematicians in front of him, but not his own or those behind him.
+\\\\
+The game consists of the mathematicians shouting \textbf{recursively} a colour (a number) in \( C \) as a guess of his own hat colour (we assume everyone hears it), starting from the first in line—that is, the one who sees everyone except himself.
+\\\\
+Before the game begins and the hats are placed on their heads, the mathematicians can devise a strategy (they are aware of \( C \), \( N \), and the index they will occupy in the queue).
+
+How can they ensure that all but at most one mathematician guess his hat colour correctly?
+
+\solution[Solution:]
+For both the problem and the bonus one, a hat colouring configuration is represented by \( \mathbf{c} \in C^{N} \), and a strategy here consists of an \( N \)-tuple \(\mathbf{f}=\left( f_i \right)_{i \in N} \), where for each \( i \in N \),
+\[
+f_i: C^{\left( N_{>i} \right)} \times C^{\left( i \right)} \rightarrow C
+\]
+is a function that mathematician \( i \in N \) will be able to apply for any possible outcomes
+\[
+\left( \omega, \omega' \right) \in C^{\left( N_{>i} \right)} \times C^{\left( i \right)}
+\]
+he can sense: the part he sees, \( \omega \in C^{\left( N_{>i} \right)} \), and the part he hears, \( \omega' \in C^{\left( i \right)} \).
+\\\\
+Any such \( N \)-tuple of functions \(\mathbf{f}\) induces a guess function \( \mathbf{G}_{\mathbf{f}}: C^{\left( N \right)} \rightarrow C^{\left( N \right)} \), defined recursively for \( \mathbf{c} \in C^{\left( N \right)} \) by:
+\[
+\forall i \in N,\ \mathbf{G}_{\mathbf{f}}(\mathbf{c})(i) := f_i\left( \mathbf{c}\big|_{N_{>i}}, \mathbf{G}_{\mathbf{f}}(\mathbf{c})\big|_{i} \right).
+\]
+The winning property for this strategy \( \mathbf{f} \) is that, for any hat colour configuration \( \mathbf{c} \in C^{\left( N \right)} \), the output \( \mathbf{G}_{\mathbf{f}}(\mathbf{c}) \) differs from \( \mathbf{c} \) at most at one coordinate.
+\\\\
+If \( N = 1 \), the strategy of the mathematician consists of shouting any colour (trivial case). Any function \( f_0: C^{\left( \varnothing \right)} \times C^{\left( 0 \right)} \rightarrow C \) is such that \( \mathbf{f} := (f_i)_{i \in N} \) is winning.
+\\\\
+If \( N \geq 2 \), the mathematicians can employ the following strategy to ensure that all but at most one guess correctly:
+\\\\
+The first mathematician \(0\) looks at the sum of the colours he sees in the set formed by the remaining mathematicians \(\left\{ j \mid 1 \leq j \leq N - 1 \right\}\). It is clear that this sum can be uniquely written as \(qC + r\) for \(q \in \mathbb{N}\) and \(r \in C\) (for \(2 \leq C < \aleph_0\), it is the common Euclidean division, and when \(C = \aleph_0\), this is also valid since \(0 \cdot \aleph_0 = 0\) and \(r \in \aleph_0 = C\)). So mathematician \(0\) shouts \(r \in C\). Although mathematician \(0\) may guess incorrectly (this is inevitable), each mathematician \(1 \leq j \leq N - 1\), who sees everyone in front of himself, tracks all previous guesses made by mathematicians \(\left\{ j' \mid 1 \leq j' \leq j - 1 \right\}\) behind him (which he knows are correct, assuming the strategy is followed). Thus, when it is his turn, the only colours in the sequence he does not know are his own and the first one. Hence, by comparing this label with the similar label obtained from the sum of the colours he knows, he can determine his own hat colour. Consequently, all mathematicians \(1 \leq j \leq N - 1\) will recursively shout their hat colours, and at most one error may occur—possibly by the first mathematician \(0\).
+\\\\
+Mathematically, as in the previous problems, we see \(\mathbb{N} \subset \mathbb{Z}\), and we let (as discussed) the unique function \(r_{C} : \mathbb{Z} \rightarrow C\) be such that \(\forall a \in \mathbb{Z}\, \exists! q \in \mathbb{Z}\) with \(a = qC + r_{C}(a)\). Trivially, if \(2 \leq C < \aleph_0\), then this is the remainder of the Euclidean division, whereas if \(C = \aleph_0\), then \(r_C = \operatorname{id}_{\mathbb{Z}}\). In all cases, \(r_C\) has the property that \(r_{C}\big|_{C} = \operatorname{id}_{C}\), and for \(a, b, c, d \in \mathbb{Z}\):
+\[
+r_{C}\left( a r_{C}\left( b \right) + c r_{C}\left( d \right) \right) = r_{C}\left( ab + cd \right).
+\]
+The last property extends (by induction) to any finite sum and nesting of \(r_{C}\).
+\\\\
+Let furthermore \(\mathbf{c} \in C^N\) be a hat colouring configuration in order of the mathematicians’ indices. Then each mathematician \(i \in N\) knows, at step \(i\):
+\begin{itemize}
+    \item The partial sequence \(\left.\mathbf{c}\right|_{N_{>i}}\); in particular, he observes the label
+    \[
+    l_i := r_{C}\left( \sum_{k \in N_{>i}} \mathbf{c}(k) \right) \in C.
+    \]
+\end{itemize}
+After the first mathematician shouts \(l_0 \in C\), when the turn of mathematician \(1 \leq j \leq N - 1\) arrives, he knows furthermore:
+\begin{itemize}
+    \item \(l_0\), corresponding to the entire group of mathematicians \(\left\{ j' \mid 1 \leq j' \leq N - 1 \right\}\) (excluding the first one), of which he is a part.
+    \item \(\left.\mathbf{c}\right|_{j \setminus \left\{ 0 \right\}}\), which is (if non-empty, that is, if \(j \geq 2\)) reconstructed from the correct guesses of the previous mathematicians \(\left\{ j' \mid 1 \leq j' \leq j - 1 \right\}\) (by induction they are correct).
+\end{itemize}
+Based on this, he can compute
+\[
+\tilde{l}_j := r_{C}\left( l_0 - l_j - \sum_{j' \in j \setminus \left\{ 0 \right\}} \mathbf{c}(j') \right),
+\]
+which, by the property of \(r_C\), is equal to:
+\[
+\tilde{l}_j = r_{C}\left( \sum_{k' \in N \setminus \left\{ 0 \right\}} \mathbf{c}(k') - \sum_{k \in N \setminus \left\{ j, 0 \right\}} \mathbf{c}(k) \right) = r_{C}\left( \mathbf{c}(j) \right) = \mathbf{c}(j).
+\]
+Therefore, mathematician \(j\) knows his hat colour when it is his turn to shout, and can act accordingly.
+\\\\
+This holds when \(j = 1\) (since \(\sum_{j' \in 1 \setminus \left\{ 0 \right\}} \mathbf{c}(j') = 0\) is an empty sum), so the base case is complete. The above process is exactly the induction step, so it is justified to assume that the guesses are correct.
+\\\\
+In this way, all mathematicians \(1 \leq j \leq N - 1\) deduce their hat colours correctly. This guarantees at most one incorrect guess—possibly made only by the first mathematician.
+\\\\
+Formally, our discussion permits us to construct the following example of a winning strategy for the mathematicians. Let \(\mathbf{f} := \left( f_i \right)_{i \in N}\), where for each \(i \in N\), \(f_i : C^{N_{>i}} \times C^i \rightarrow C\) is defined for \(\left( \omega, \omega' \right) \in C^{N_{>i}} \times C^i\) by:
+\[
+f_i\left( \left( \omega, \omega' \right) \right) = 
+\begin{cases}
+r_{C}\left( \sum_{k \in \operatorname{dom}\left( \omega \right)} \omega(k) \right) & \text{if } i = 0, \\
+r_{C}\left( \omega'(0) - \sum_{k \in \operatorname{dom}\left( \omega \right)} \omega(k) - \sum_{k' \in \operatorname{dom}\left( \omega' \right) \setminus \left\{ 0 \right\}} \omega'(k') \right) & \text{otherwise},
+\end{cases}
+\]
+then \(\mathbf{f}\) is winning.
+\\\\
+It is clear that \(\mathbf{f}\) requires finite storage when \(1 \leq N < \aleph_0\) and \(2 \leq C < \aleph_0\). However, if \(1 \leq N < \aleph_0\) and \(C = \aleph_0\), then \(\mathbf{f}\) requires the storage by each mathematician \(i\) of \(f_i\), which is of size \(\left| f_i \right| = \aleph_0 < 2^{\aleph_0}\).
+\\\\
+\textbf{Bonus:} Solve the same problem when there are \(N = \aleph_0\) mathematicians.
+\solution[Solution:]
+The key idea is to use the fact that the mathematicians possess infinite memory (capable of storing finitely many sets of cardinality up to \(2^{\aleph_0}\)), can see infinitely far, can apply the axiom of choice, and can access individually any function they are capable of storing.
+\\\\
+The mathematicians collectively choose a representative for each equivalence class of sequences in \(C^{\mathbb{N}}\) that differ at only finitely many positions. They pre-agree on these representatives (a set of size \(2^{\aleph_0}\)) and store them in memory (technically, they store the entire choice function). When the game begins, there is a true hat-colour configuration. Each mathematician observes the hat sequence in front of him. Each of them extends his view backwards (say, by appending zeroes backwards starting from his index) and uses the pre-agreed choice function to select the representative of the corresponding equivalence class (that is, the equivalence class of the extended observed sequence). By construction of the choice function, this representative differs from the true hat configuration at only finitely many positions. Moreover, since each unseen part (the hats behind) is finite and they use the same choice function, all mathematicians obtain the same representative for the equivalence class of the true hat configuration.
+\\\\
+Now famously, at this stage, if they were to \textbf{simultaneously} shout the colour of the representative sequence at the respective index, they would make only finitely many errors, and this would suffice for a well-known weaker version of this hat problem. However, the problem here asks for a stronger conclusion by requiring a way to guarantee at most one error, which can be achieved if we allow the mathematicians to shout \textbf{recursively}. To this end, the mathematicians refine their strategy as follows:
+\\\\
+For a hat-colour configuration \( \mathbf{c} \in C^{\mathbb{N}} \), each mathematician \( i \in \mathbb{N} \) is able to observe the finite subset \( E_i \subset \mathbb{N}_{>i} \), consisting of all indices in \( \mathbb{N} \) (excluding those less than or equal to \( i \)) for which \( \mathbf{c} \) does not agree with its representative. Reducing the problem in this way (for any number of colours \( 2 \leq C \leq \aleph_0 \)) was the most significant part.
+\\\\
+They can now use (if we view \( \mathbb{N} \subset \mathbb{Z} \)) the same unique function \( r_C \colon \mathbb{Z} \rightarrow C \) as in the previous problems. At the start of the game, there is a true hat configuration \( \mathbf{t} \in C^{\mathbb{N}} \), and all mathematicians know the same representative \( \mathbf{s} \) of the true hat configuration. The first mathematician shouts a label of the hat-colouring sequence \( \left. \mathbf{t} \right|_{\mathbb{N}_{>0}} \in C^{\mathbb{N}_{>0}} \) he observes, with a number in \( C \), by passing as an argument to \( r_C \) the sum of the images of \( \left. \left( \mathbf{t} - \mathbf{s} \right) \right|_{E_0} \). While he may guess incorrectly (this is inevitable), each mathematician \( 1 \leq j < \aleph_0 \), who sees everyone in front of himself, will at his turn be able to deduce correctly his hat colour by using this label and assuming all prior mathematicians have followed the procedure correctly. Indeed, he will update \( E_j \) to obtain \( \tilde{E}_j \) by including all the tracked indices in \( j \setminus \left\{ 0 \right\} \) for which \( \mathbf{c} \) does not agree with its representative. He then compares the shouted label by mathematician \( 0 \) with the analogous label obtained by also passing as an argument to \( r_C \) the sum of the colours he observes and has heard in his truncated part \( \left. \left( \mathbf{t} - \mathbf{s} \right) \right|_{\tilde{E}_j} \). With this comparison, he can determine his own hat colour.
+\\\\
+Mathematically, let us consider the same equivalence relation defined for a fixed \( 2 \leq C \leq \aleph_0 \) in the previous bonus:
+\[
+\sim := \left\{ \left( \mathbf{c}, \mathbf{c}' \right) \in C^{\mathbb{N}} \times C^{\mathbb{N}} \,\middle|\, \left| \operatorname{supp} \left( \mathbf{c} - \mathbf{c}' \right) \right| < \aleph_0 \right\} \subset C^{\mathbb{N}} \times C^{\mathbb{N}},
+\]
+and any choice function—guaranteed to exist by the Axiom of Choice—:
+\[
+\chi \colon C^{\mathbb{N}} / {\sim} \hookrightarrow \bigcup C^{\mathbb{N}} / {\sim}
+\]
+satisfying \( \forall \mathbf{c} \in C^{\mathbb{N}}, \chi\left( \left[ \mathbf{c} \right]_{\sim} \right) \in \left[ \mathbf{c} \right]_{\sim} \). All mathematicians collectively use the same choice function \( \chi \) to select the same representative of each equivalence class.
+\\\\
+This choice function \(\chi\) requires, as in the previous bonus, \(\left|\chi\right| = 2^{\aleph_0}\) units of storage capacity. Furthermore, for all \( i \in \mathbb{N} \), there is a function
+\[
+\chi^{i} \colon C^{\mathbb{N}_{>i}} \rightarrow C^{\mathbb{N}}
+\]
+defined for \( \mathbf{c} \in C^{\mathbb{N}_{>i}} \) by
+\[
+\chi^{i} \left( \mathbf{c} \right) := \chi \left( \left[ \mathbf{0}_{i+1} \frown \mathbf{c} \right]_{\sim} \right), \text{ where } \left\{\mathbf{0}_{i+1}\right\} = \left\{0\right\}^{i+1}.
+\]
+That is, the choice function is used to select the representative of the equivalence class of the extended observed sequence by mathematician \( i \) (he chooses to extend backwards from his index \( i \) by appending zeroes; however, by the definition of \( \chi \), this is independent of that choice). There is also the function
+\[
+\operatorname{E}_{\chi, i} \colon C^{\mathbb{N}_{>i}} \rightarrow \mathscr{P}_{\mathrm{fin}} \left( \mathbb{N}_{>i} \right)
+\]
+defined for \( \mathbf{c} \in C^{\mathbb{N}_{>i}} \) by
+\[
+\operatorname{E}_{\chi, i} \left( \mathbf{c} \right) := \left\{ k \in \mathbb{N}_{>i} \,\middle|\, \mathbf{c}(k) \neq \chi^{i} \left( \mathbf{c} \right)(k) \right\}.
+\]
+This is the function that returns the finite subset consisting of all the indices in \( \mathbb{N} \) (excluding those less than or equal to \( i \)) for which \( \mathbf{c} \) does not agree with the representative of any of its extensions. It is clear that each \( \operatorname{E}_{\chi, i} \) requires \(\left| \operatorname{E}_{\chi, i} \right| = 2^{\aleph_0}\) units of storage capacity. Before the game begins, each mathematician \( i < \aleph_0 \) stores \( \chi \) and \( \operatorname{E}_{\chi, i} \).
+\\\\
+When the game begins, there is a sequence \(\mathbf{t} \in \left\{0,1\right\}^{\mathbb{N}}\) representing the hat colour configuration in order of the mathematicians’ indices. Each mathematician \( i \in \aleph_0 = \mathbb{N} \) can observe only the partial sequence \(\left.\mathbf{t}\right|_{\mathbb{N}_{>i}}\) (the tail beginning at position \( i+1 \)), from which he constructs a finite extension (say, as before, by appending zeroes backwards according to his index):
+\[
+\mathbf{t}_i := \mathbf{0}_{i+1} \frown \left.\mathbf{t}\right|_{\mathbb{N}_{>i}}.
+\]
+He then computes \(\chi\left(\left[\mathbf{t}_i\right]_{\sim}\right) = \chi^{i} \left( \left.\mathbf{t} \right|_{\mathbb{N}_{>i}} \right)\) using the same shared choice function \(\chi\). For all \( j \in \mathbb{N} \), the support condition:
+\[
+\left|\operatorname{supp} \left( \mathbf{t}_i - \mathbf{t}_j \right)\right| \leq j - i < \aleph_0
+\]
+implies \(\mathbf{t}_i \sim \mathbf{t}_j\). The well-definedness of \(\chi\) enforces:
+\[
+\chi \left( \left[\mathbf{t}_i\right]_{\sim} \right) = \chi \left( \left[\mathbf{t}_j\right]_{\sim} \right),
+\]
+yielding a unique representative sequence \(\mathbf{s}\) satisfying \(\mathbf{t}_j \sim \mathbf{s}\) for all \( j \in \mathbb{N} \) (since \(\mathbf{s} = \chi \left( \left[\mathbf{t}_j\right]_{\sim} \right) \in \left[\mathbf{t}_i\right]_{\sim} \)). Furthermore, since:
+\[
+\left|\operatorname{supp} \left( \mathbf{t} - \mathbf{t}_i \right)\right| \leq i < \aleph_0,
+\]
+we have \(\mathbf{t} \sim \mathbf{t}_i\). By the transitivity of \(\sim\), it follows that \(\mathbf{t} \sim \mathbf{s}\). Thus, the chosen sequence \(\mathbf{s}\) differs from \(\mathbf{t}\) at only finitely many positions, and all mathematicians \( i \in \mathbb{N} \) know the same sequence \(\chi \left( \left[\mathbf{t}_i\right]_{\sim} \right) = \mathbf{s}\). Notice that \(E_i := \operatorname{E}_{\chi, i} \left( \left.\mathbf{t} \right|_{\mathbb{N}_{>i}} \right)\) satisfies \(E_i = \left\{ k \in \mathbb{N}_{>i} \,\middle|\, \mathbf{t}(k) \neq \mathbf{s}(k) \right\}\). In particular, we crucially have \( E_i \subset E_0 \subset E_i \cup i+1 \).
+\\\\
+Hence, each mathematician \(i \in N = \mathbb{N}\) knows:
+\begin{itemize}
+    \item The partial sequence \(\left.\mathbf{t}\right|_{\mathbb{N}_{>i}}\) and the same representative \(\mathbf{s}\) of any of its extensions.
+    \item \(E_i\).
+\end{itemize}
+The first mathematician \(0\) shouts \(l_0 := r_{C}\left(\sum_{k \in E_0} \left( \mathbf{t} - \mathbf{s} \right)(k)\right) \in C\), and when the turn of mathematician \(1 \leq j < \aleph_0\) arrives, he knows:
+\begin{itemize}
+    \item \(l_0 \in C\).
+    \item \(\left.\mathbf{c}\right|_{j \setminus \left\{0\right\}}\), which is (if non-empty, that is, if \(j \geq 2\)) reconstructed from the correct guesses of the previous mathematicians \(1 \leq j' \leq j - 1\) (by induction, they are correct).
+\end{itemize}
+Based on this, he can update \(E_j\):
+\[
+\tilde{E}_j := E_j \cup \left\{ k \in j \setminus \left\{0\right\} \mid \mathbf{c}(k) \neq \mathbf{s}(k) \right\}
+\]
+and calculate the same \(l_j := r_{C}\left(\sum_{k \in \tilde{E}_j} \left( \mathbf{t} - \mathbf{s} \right)(k)\right) \in C\) as in the previous bonus. So he can compute:
+\[
+\tilde{l}_j := r_{C}\left( \mathbf{s}(j) + l_0 - l_j \right)
+\]
+Exactly as in the previous bonus, \(\tilde{l}_j = \mathbf{t}(j)\), so he knows his hat colour through the computation \(\tilde{l}_j\).
+\\\\
+Hence, mathematician \(j\) knows his hat colour when it is his turn to shout, and can act accordingly.
+\\\\
+This is true when \(j = 1\) (since \(\tilde{E}_1 = E_1\) as \(1 \setminus \left\{0\right\} = \varnothing\)), so the base case is done, and the above process is exactly the induction step, hence it is justified to assume that the guesses are correct.
+\\\\
+In this way, all mathematicians \(1 \leq j < \aleph_0\) deduce recursively their hat colours correctly. This guarantees at most one incorrect guess—possibly made only by the first mathematician.
+\\\\
+Formally, our discussion permits us to design the following example of a winning strategy for the mathematicians. Let \(\mathbf{f} := \left( f_i \right)_{i \in N}\), where for each \(i \in \mathbb{N} = \aleph_0\), \(f_i : C^{\mathbb{N}_{>i}} \times C^i \rightarrow C\) is defined for \(\left( \omega, \omega' \right) \in C^{\mathbb{N}_{>i}} \times C^i\) by:
+\[
+f_i\left( \left( \omega, \omega' \right) \right) =
+\begin{cases}
+r_{C}\left( \sum_{k \in \operatorname{E}_{\chi,0}(\omega)} \omega(k) \right) & \text{if } i = 0, \\
+r_{C}\left( \chi^{i}(\omega)(i) + \omega'(0) - \sum_{k \in \operatorname{E}_{\chi,i}(\omega)} \omega(k) - \sum_{\substack{k' \in i \setminus \left\{0\right\} \\ \omega'(k') \neq \mathbf{\chi}^{i}(\omega)(k')}} \omega'(k') \right) & \text{otherwise},
+\end{cases}
+\]
+is winning.
+\\\\
+It is clear that \(\mathbf{f}\) requires the storage, for each mathematician \(i\), of \(f_i\), which is of size \(\left| f_i \right| = 2^{\aleph_0}\).
+\begin{remark}
+As in the previous bonus, the above strategy works for any \(1 \leq N \leq \aleph_0\) \textit{mutatis mutandis}, but in the case \(1 \leq N < \aleph_0\), \(\sim\) is then easily seen to be the equivalence relation in which everything is equivalent to everything, and a choice function is thus any function as before. Thus, we have in fact found (with possibly only trivial modifications) a global strategy (with the storage requirement) for any number of mathematicians \(1 \leq N \leq \aleph_0\), and any number of colours \(2 \leq C \leq \aleph_0\)! Moreover, it is clear that the existence of a winning strategy for the first problem and its bonus is \textbf{equivalent} to the existence of a winning strategy for this problem and its bonus respectively.
+\end{remark}
+
+\newpage
+\subsection{}
+Consider \(\left.1 \leq N < \aleph_0\right.\) mathematicians standing in a room and \(\left.1 \leq C \leq \aleph_0\right.\) colours. Each mathematician \(\left.0 \leq i < N\right.\) wears a hat whose colour is chosen from the set \(C\). Each mathematician sees the colours of all the other hats but not his own. Assume the mathematicians are already ordered, i.e., each is assigned a distinct index \(i \in N\).
+\\\\
+The game consists of the mathematicians \textbf{simultaneously} shouting a colour (a number) in \(C\) as a guess of their own hat colour.
+\\\\
+Before the game starts and the hats are placed on their heads, the mathematicians may devise a strategy (they are aware of \(C\), \(N\), and the index they are assigned).
+
+For which numbers of colours \(\left.1 \leq C \leq \aleph_0\right.\) can they ensure that at least one mathematician guesses his hat colour correctly?
+
+
+\solution[Solution:]
+For both the problem and the bonus one: a strategy here consists of an \(N\)-tuple \(\left(f_i\right)_{i \in N}\), where for each \(i \in N\),
+\[
+f_i \colon C^{N \setminus \left\{i\right\}} \rightarrow C,
+\]
+is the function that mathematician \(i \in N\) will be able to apply to assign a colour in \(C\) based on any possible outcomes
+\[
+\omega \in C^{N \setminus \left\{i\right\}},
+\]
+he can see. Any such \(N\)-tuple of functions \(\mathbf{f}\) induces a guess function \(\mathbf{G}_{\mathbf{f}} \colon C^N \rightarrow C^N\), defined for \(\omega \in C^N\) by:
+\[
+\forall i \in N, \quad \mathbf{G}_{\mathbf{f}}(\omega)(i) := f_i\left(\left.\omega\right|_{N \setminus \left\{i\right\}}\right).
+\]
+The winning property for this strategy \(\mathbf{f}\) is that, if we let any hat colour configuration \(\mathbf{c} \in C^N\), then \(\mathbf{G}_{\mathbf{f}}(\mathbf{c})\) agrees with \(\mathbf{c}\) at least at one coordinate.
+\\\\
+We claim that there exists a winning strategy \(\mathbf{f} = \left(f_i\right)_{i \in N}\) for the \(N\) mathematicians only for every \(\left.1 \leq C \leq N < \aleph_0\right.\). The proof proceeds in three parts:
+\begin{enumerate}
+    \item First, we demonstrate that no winning strategy exists when \(C > N\).
+    \item Next, we establish the case \(C = N\) by presenting an explicit winning strategy.
+    \item Finally, we give a winning strategy for \(C < N\), yielding at least \(\left\lfloor \frac{N}{C} \right\rfloor\) correct guess(es) by modifying the \(C = N\) strategy.
+\end{enumerate}
+
+\(\bullet\) If there are more colours than mathematicians (\(C > N\)), then necessarily \(C \geq 2\), and no winning strategy exists.
+\\\\
+Let any strategy \(\left(f_i\right)_{i \in N}\) for \(N\) mathematicians, where \(f_i \colon C^{N \setminus \left\{i\right\}} \rightarrow C\) are their functions. It is clear that:
+\begin{itemize}
+    \item The total set of possible hat assignments is \(C^N\).
+    \item Each \(f_i\)'s correct assignment set \(B_i := \left\{\omega \in C^N \mid \omega(i) = f_i\left(\left.\omega\right|_{N \setminus \left\{i\right\}}\right) \right\}\) satisfies \(B_i \hookrightarrow C^{N \setminus \left\{i\right\}}\) through the map \(\omega \mapsto \left.\omega\right|_{N \setminus \left\{i\right\}}\).
+    \item The total set \(\bigcup_{i \in N} B_i\) of all assignments for which at least one guess is correct satisfies \(\bigcup_{i \in N} B_i \hookrightarrow \bigcup_{i \in N} C^{N \setminus \left\{i\right\}}\) through the map \(\omega \mapsto \left.\omega\right|_{N \setminus \left\{\min \left\{i \in N \mid \omega \in B_i\right\}\right\}}\).
+\end{itemize}
+
+If \(N < C < \aleph_0\), we have a straightforward counting argument:
+\[
+\left| \bigcup_{i \in N} B_i \right| \leq \left| \bigcup_{i \in N} C^{N \setminus \left\{i\right\}} \right| = N \cdot C^{N - 1} < C \cdot C^{N - 1} = C^N = \left| C^N \right|,
+\]
+which implies that \(C^N \setminus \bigcup_{i \in N} B_i \neq \varnothing\), or in other words, that there exists at least one hat assignment with no correct guesses.
+\\\\
+In general, for \(N < C \leq \aleph_0\), we can always construct a hat assignment with no correct guesses. We show here how it is done:
+\[
+\substack{\textit{Not done yet; I have some incomplete arguments. If you have ideas, send them to me:} \\ \href{mailto:antoine@du-fresne.ch}{antoine@du-fresne.ch}}
+\]
+$\bullet$ If there are as many colours as mathematicians \(\left(C = N\right)\), then necessarily \(C < \aleph_0\) as \(N < \aleph_0\), and a strategy exists.
+\\\\
+If \(N = 1\), the strategy consists of the single mathematician shouting the unique possible colour (the trivial case). Thus, any \(f_0 : 1^1 \rightarrow 1\) is such that \(\mathbf{f} := \left(f_i\right)_{i \in N}\) is winning.
+\\\\
+If \(N \geq 2\), the mathematicians can employ the following strategy to ensure that at least one guesses correctly:
+\\\\
+When the game starts, there is a sequence \(\mathbf{c} \in C^{N} = N^N\) representing the colours of the hats in the order of the mathematicians’ indices. 
+We are motivated by the case \(N = 2\), where, after some thought, the strategy consists of one mathematician stating the colour he sees on the other’s hat, and the other stating the colour he does not see, i.e., \(\mathbf{g}(0) := \mathbf{c}(1)\), \(\mathbf{g}(1) := 1 - \mathbf{c}(0)\). A quick mental exercise confirms that \(\exists \tilde{i} \in N\) such that \(\mathbf{g}(\tilde{i}) = \mathbf{c}(\tilde{i})\); indeed, mathematician \(0\) is guessing that both hat colours are the same, and mathematician \(1\) is guessing that both hat colours are different. Modulo \(2\), we have:
+\[
+\mathbf{g}(0) \equiv 0 - \mathbf{c}(1) \pmod{2} \quad \text{and} \quad \mathbf{g}(1) \equiv 1 - \mathbf{c}(0) \pmod{2}.
+\]
+We attempt to generalise this to an arbitrary number \(N \geq 2\) of mathematicians.
+\\\\
+Notice that as the index \(i\) varies in \(N\), and that \(\sum_{j \in N} \mathbf{c}(j) \in \mathbb{N}\) is fixed, there must be exactly one index \(\tilde{i} \in N\) such that:
+\[
+\tilde{i} \equiv \sum_{j \in N} \mathbf{c}(j) \pmod{N}.
+\]
+If the mathematician \(\tilde{i}\) shouts the colour \(t \in C = N\) with \(t \equiv \tilde{i} - \sum_{j \in N \setminus \left\{\tilde{i}\right\}} \mathbf{c}(j) \pmod{N}\) (which happily does not depend on \(\mathbf{c}(\tilde{i})\)), then by the choice of \(\tilde{i}\), he will correctly shout his own colour as:
+\[
+\tilde{i} - \sum_{j \in N \setminus \left\{\tilde{i}\right\}} \mathbf{c}(j) \equiv \mathbf{c}(\tilde{i}) \pmod{N},
+\]
+and so \(t = \mathbf{c}(\tilde{i})\) (since both are in \(N\) and congruent modulo \(N\)). The problem is that the mathematicians do not know in advance which index \(\tilde{i} \in N\) satisfies \(\tilde{i} \equiv \sum_{j \in N} \mathbf{c}(j) \pmod{N}\). To guarantee that at least one of them guesses correctly, each mathematician \(i \in N\) will shout \(t_i \in N\), where:
+\[
+t_i \equiv i - \sum_{j \in N \setminus \left\{i\right\}} \mathbf{c}(j) \pmod{N}.
+\]
+Thus, at least one of the mathematicians guesses correctly.
+\\\\
+Mathematically, as in the previous problems, we see \(\mathbb{N} \subset \mathbb{Z}\), we recall that \(C = N\), and we let the unique function \(r_{N} : \mathbb{Z} \rightarrow N\) be such that \(\forall a \in \mathbb{Z}\, \exists! q \in \mathbb{Z}\) with \(a = qN + r_{N}(a)\), which is in our case the remainder of the Euclidean division. \(r_N\) has the property that \(r_{N}\big|_{N} = \operatorname{id}_{N}\), and for \(a, b, c, d \in \mathbb{Z}\):
+\[
+r_{N}\left( a r_{N}\left( b \right) + c r_{N}\left( d \right) \right) = r_{N}\left( ab + cd \right).
+\]
+The last property extends (by induction) to any finite sum and nesting of \(r_{N}\).
+\\\\
+Let furthermore \(\mathbf{c} \in C^N\) be a hat colouring configuration in the order of the mathematicians’ indices. Then each mathematician \(i \in N\) knows:
+\begin{itemize}
+\item The partial sequence \(\mathbf{c} \setminus \left\{\left(i, \mathbf{c}(i)\right)\right\}\); in particular, he knows \(\sum_{j \in N \setminus \left\{i\right\}} \mathbf{c}(j)\).
+\item His index \(i \in N\).
+\end{itemize}
+Therefore, he knows:
+\begin{itemize}
+    \item  \(l_i := r_{N}\left(i - \sum_{j \in N \setminus \left\{i\right\}} \mathbf{c}(j)\right) \in N.\)
+\end{itemize}
+The mathematician \(\tilde{i} := r_{N}\left(\sum_{j \in N} \mathbf{c}(j)\right) \in N\) is such that \(l_{\tilde{i}} = \mathbf{c}(\tilde{i})\). Indeed, by the properties of \(r_N\):
+\begin{align*}
+l_{\tilde{i}} &= r_{N}\left(\tilde{i} - \sum_{j \in N \setminus \left\{\tilde{i}\right\}} \mathbf{c}(j)\right) = r_{N}\left(r_{N}\left(\sum_{j \in N} \mathbf{c}(j)\right) - \sum_{j \in N \setminus \left\{\tilde{i}\right\}} \mathbf{c}(j)\right) \\
+&= r_{N}\left(\sum_{j \in N} \mathbf{c}(j) - \sum_{j \in N \setminus \left\{\tilde{i}\right\}} \mathbf{c}(j)\right) = r_{N}\left(\mathbf{c}(\tilde{i})\right) = \mathbf{c}(\tilde{i}).
+\end{align*}
+In this way, mathematician \(\tilde{i}\) will shout (without knowing it) his hat colour correctly. Hence, at least one of the mathematicians shouts his hat colour correctly.
+\\\\
+Formally, our discussion permits us to construct the following example of a winning strategy for the mathematicians. Let \(\mathbf{f} := \left( f_i \right)_{i \in N}\), where for each \(i \in N\), \(f_i : N^{N \setminus \left\{k\right\}} \rightarrow N\) is defined for \(\omega \in N^{N \setminus \left\{k\right\}}\) by:
+\[
+f_i(\omega) := r_{N}\left(i - \sum_{j \in N \setminus \left\{i\right\}} \omega(j)\right),
+\]
+then \(\mathbf{f}\) is winning.
+\\\\
+It is clear that \(\mathbf{f}\) requires finite storage as \(1 \leq N < \aleph_0\).
+\\\\
+Let us denote this strategy \(\left(f_i\right)_{i \in N}\) in the case \(C = N\) by \(\operatorname{Strat}(N, N) := \left(f_i\right)_{i \in N}\).
+\\\\
+$\bullet$ If there are fewer colours than mathematicians \(\left(C < N\right)\), then necessarily \(N \geq 2\) and there is a winning strategy that gives at least $\left\lfloor\frac{N}{C}\right\rfloor$ correct guesses.
+\\\\
+They form a maximum number of disjoint subset of $C$ mathematicians (for example the subsets $\{(k+1)C\setminus kC\mid 0\leq k<\left\lfloor\frac{N}{C}\right\rfloor\}$) and each subset apply the previous strategie $\operatorname{Strat}(C, C)$. Each subset has at least one mathematician that guesses correctly. Thus they have at least $\left\lfloor\frac{N}{C}\right\rfloor$ correct guesses. 
+\\\\
+Mathematically, as in the previous problems, we see \(\mathbb{N} \subset \mathbb{Z}\) and we let the unique function \(r_{C} : \mathbb{Z} \rightarrow C\) be such that \(\forall a \in \mathbb{Z}\, \exists! q \in \mathbb{Z}\) with \(a = qC + r_{C}(a)\) which is in our case the remainder of the Euclidean divison (as $C<N<\aleph_0$). \(r_C\) has the usual property stated previously. Notice that $q$ can be computed as follows $q=\frac{a-r_{C}(a)}{C}$.
+\\\\
+Let furthermore $\mathbf{c}\in C^{N}$ be a hat colouring configuration in order of the mathematicians' indices. Then each mathematician $i\in N$ knows:
+\begin{itemize}
+\item The partial sequence \(\mathbf{c} \setminus \left\{(i, \mathbf{c}(i))\right\}\), in particular he knows \(\sum_{j \in N \setminus \left\{i\right\}} \mathbf{c}(j)\).
+\item His index $i\in N$. In particular, (following our example of partition of subset) he knows if he is part of the subsets of size $C$ (if $i<\left\lfloor\frac{N}{C}\right\rfloor C\leq N$) or not (if $\left\lfloor\frac{N}{C}\right\rfloor C\leq i<N$).
+\end{itemize}
+Therefore, he knows whether:
+\begin{itemize}
+\item He applies the strategie for the subset of size $C$ he is part of $\tilde{C}_i:=\left(\frac{i-r_{C}(i)}{C}+1\right) C\setminus\left(\frac{i-r_{C}(i)}{C}\right)C$ by computing:
+$$l_i:=r_{C}\left(r_{C}(i)-\sum_{j\in \tilde{C}_{i}}\mathbf{c}\left(j\right)\right)\in C.$$
+\item Or he is not part of such a subset and he computes $l_i:=0$.
+\end{itemize}
+By the same analysis as before, each complete subset of size $C$, for $0\leq k<\left\lfloor\frac{N}{C}\right\rfloor$ $(k+1)C\setminus kC$ have a mathematician (namely $\tilde{i}_{k}:=kC + r_{C}(\sum_{j\in C}\mathbf{c}(kC+j))\in N$) that will shout (without knowing) correctly his hat colour.
+In this way at least $\left\lfloor\frac{N}{C}\right\rfloor$ mathematicians shouts their hat correctly.
+\\\\
+Formally, our discussion permits us to construct the following example of a winning strategy for the mathematicians. Let \(\mathbf{f} := \left( f_i \right)_{i \in N}\), where for each \(i \in N\), \(f_i: C^{N \setminus \left\{k\right\}} \rightarrow C\) is defined for \(\omega \in C^{N \setminus \left\{k\right\}}\) by:
+\[
+f_i(\omega) := \begin{cases}
+r_{C}\left(r_{C}(i) - \sum_{j \in \left(\frac{i-r_{C}(i)}{C}+1\right) C\setminus\left(\frac{i-r_{C}(i)}{C}\right)C} \omega(j)\right)  \text{ if }  i<\left\lfloor\frac{N}{C}\right\rfloor C,\\
+0   \text{ else } \left\lfloor\frac{N}{C}\right\rfloor C\leq i<N,
+\end{cases}
+\]
+then \(\mathbf{f}\) is winning.
+\\\\
+It is clear that \(\mathbf{f}\) requires finite storage as $1\leq C<N<\aleph_0$.
+\\\\
+Let us denote this strategy \(\left(f_i\right)_{i \in N}\) in the case \(C < N\) by \(\operatorname{Strat}(N, C) := \left(f_i\right)_{i \in N}\).
+\\\\
+\textit{Remark}
+In total, we could summarize the problem by saying that the $N$ mathematician have a strategie for any colour $1\leq C\leq\aleph_0$ that guarantees at least $\left\lfloor\frac{N}{C}\right\rfloor$ correct guesses (where $\frac{N}{\aleph_0}:=0$).
+\\\\
+\textbf{Bonus:} What can be said, at best, with and without the Axiom of Choice when there are \(\left.1\leq N\leq \aleph_0\right.\) mathematicians and \(\left.1\leq C\leq \aleph_0\right.\) colours?
+\solution[Solution:]
+When \(\left.1\leq N<C\leq\aleph_0\right.\), we have proven in the previous problem that there exists no winning strategy. We have also proven that when \(\left.1\leq C\leq N<\aleph_0\right.\), then \(\operatorname{Strat}(N,C)\) is a strategy that guarantees at least \(\left\lfloor\frac{N}{C}\right\rfloor\) correct guesses. We show that there exists no strategy \(\mathbf{f}\) that can guarantee a higher number of correct guesses. Fix \(\left.1\leq C\leq N<\aleph_0\right.\), and any strategy \(\mathbf{f}\) for the mathematicians. We construct a hat colour configuration \(\mathbf{c} \in C^N\) such that \(\mathbf{G}_{\mathbf{f}}\left(\mathbf{c}\right)\) agrees with \(\mathbf{c}\) at fewer than or equal to \(\left\lfloor\frac{N}{C}\right\rfloor\) coordinates.
+\[
+\substack{\textit{Not done yet; I have some incomplete arguments. If you have ideas, send them to me:} \\ \href{mailto:antoine@du-fresne.ch}{antoine@du-fresne.ch}}
+\]
+Now, we must address the cases \(\left.C<\aleph_0=N\right.\) and \(\left.C=N=\aleph_0\right.\).
+\\\\
+\(\bullet\) If \(C<\aleph_0=N\), then the mathematicians have a strategy that does not require the Axiom of Choice and guarantees them \(\aleph_0\) correct guesses.
+\\\\
+The strategy is the same as before and consists of the mathematicians forming groups of size \(C\).
+\[
+\substack{\textit{Solution not written yet}}
+\]
+\(\bullet\) If \(C\leq N=\aleph_0\), then the mathematicians have a strategy that requires the Axiom of Choice and guarantees finitely many incorrect guesses:
+\[
+\substack{\textit{Solution not written yet}}
+\]
+Through these hat problems, we observe how the Axiom of Choice can lead to some very strange results: somehow, almost all players can guess the number on their own head, even though they cannot see it. This is an improvement over the finite case!
+See also: \href{https://www.youtube.com/watch?v=zY67sNAtZNc}{video} ou la meme enigme \href{https://www.youtube.com/watch?v=ydPJlWJviEw}{video}
+\newpage
+\subsection{}
+In an infinite sequence, countably infinitely many mathematicians stand one behind another. Each mathematician has a natural number on his back, where each number appears exactly once but is assigned arbitrarily to a mathematician (i.e., a permutation \(\pi: \mathbb{N} \to \mathbb{N}\)). Each mathematician can see all the numbers on the backs of those standing in front of him (forming an actual infinite sequence), but not his own number or the numbers of those standing behind him.
+
+\begin{enumerate}
+    \item[(a)] The game consists of the mathematicians recursively (starting from the first in line) shouting (we assume that everyone hears, i.e., information propagates recursively to the rest of the queue) \textit{only} a number, which will be interpreted as the guess of the number on his own back. No mathematician is allowed to state a number he sees on any back in front of him, and all are aware of this rule.
+    
+    How can they ensure that everyone guesses his number correctly?
+
+    \item[(b)] As in (a), but the first \(N \geq 0\) mathematicians are silent (say nothing), meaning the mathematician in the \(N+1\)-th position starts the guessing process.
+    
+    How can they ensure that everyone except at most \(N\) guesses his number correctly?
+\end{enumerate}
+\solution[Solution:]
+\[
+\substack{\textit{Not tackled yet. If you have a solution, send it to me:} \\ \href{mailto:antoine@du-fresne.ch}{antoine@du-fresne.ch}}
+\]
+
+\newpage
+\printbibliography
+
+\end{document}

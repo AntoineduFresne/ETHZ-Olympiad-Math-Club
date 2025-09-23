@@ -1,0 +1,168 @@
+\documentclass[11pt, a4paper, oneside]{article}
+
+% ===== Page Layout =====
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{microtype}  % Improved text justification
+
+% ===== Fonts & Encoding =====
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+
+% ===== Math Packages =====
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{tensor}
+\usepackage{mathtools}
+
+% ===== Graphics & Diagrams =====
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{pst-node}
+
+% ===== Bibliography =====
+\usepackage{biblatex}
+\addbibresource{references.bib}  % Uncomment and add your .bib file
+
+% ===== Tables =====
+\usepackage{makecell}
+
+% ===== Colors =====
+\usepackage{xcolor}
+\definecolor{linkcolour}{rgb}{0.5,0,0}  % Dark red color for links
+
+% ===== Hyperlinks =====
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    breaklinks,
+    urlcolor=linkcolour, 
+    linkcolor=linkcolour,
+    citecolor=linkcolour
+}
+
+% ===== Custom Commands =====
+\newcommand{\problem}[1][]{\section{#1} \hfill \par}
+\newcommand{\solution}[1][]{\subsection*{#1}\hfill \par}
+
+% ===== Theorem Environments =====
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{lemma}
+\newtheorem*{lemma}{Lemma}
+
+% ===== Text Highlighting =====
+\usepackage{soul}
+\newcommand\ba[1]{\setbox0=\hbox{$#1$}%
+\rlap{\raisebox{.45\ht0}{\textcolor{linkcolour}{\rule{\wd0}{1pt}}}}#1} 
+\def\bc#1{\textcolor{linkcolour}{BC note: {#1}}}
+\def\b#1{\textcolor{linkcolour}{{#1}}}
+
+% ===== Comment Environment =====
+\usepackage{comment}
+\begin{comment}
+Useful LaTeX fonts:
+\usepackage{mathptmx}
+\usepackage{txfonts}
+\usepackage{pxfonts}
+\usepackage{mathpazo}
+\usepackage{mathpple}
+\usepackage{kmath,kerkis}
+\usepackage{kurier}
+\usepackage{arev}
+\usepackage{euler}
+\usepackage{eulervm}
+\end{comment}
+
+\title{Problem Set Week 8}
+\author{ETHZ Math Olympiad Club}
+\date{14 April 2025}
+\begin{document}
+\maketitle
+
+\problem[Simon's Favorite Factoring Trick Problems] 
+SFFT is often used in a Diophantine equation where factoring is needed. We let \( R \) be any unitary ring. If we have a multipolynomial in two formal variables \( X \) and \( Y \), \( P(X,Y) \in R[X,Y] \) of the form 
+\[
+P(X,Y) = aXY + bX + cY + d \in R[X,Y]
+\] 
+with \( a \in R^{\times} \). According to \textit{Simon's Favorite Factoring Trick}, this multipolynomial is:
+\[
+P(X,Y) = a\left(X + a^{-1}c\right)\left(Y + a^{-1}b\right) + d - ca^{-1}b.
+\]
+
+\subsection{AMC 12 (2012)} 
+How many non-congruent right triangles with positive integer leg lengths have areas that are numerically equal to \( 3 \) times their perimeters?
+
+\subsection{AIME (1998)} 
+An \( m \times n \times p \) rectangular box has half the volume of an \( (m+2) \times (n+2) \times (p+2) \) rectangular box, where \( m, n \), and \( p \) are integers, and \( m \leq n \leq p \). What is the largest possible value of \( p \)?
+
+\subsection{BMO (2005)} 
+The integer \( N \) is positive. There are exactly \( 2005 \) ordered pairs \( (x,y) \) of positive integers satisfying:
+\[
+\frac{1}{x} + \frac{1}{y} = \frac{1}{N}.
+\]
+Prove that \( N \) is a perfect square.
+
+\subsection{JBMO (2003)} 
+Let \( n \) be a positive integer. A number \( A \) consists of \( 2n \) digits, each of which is \( 4 \); and a number \( B \) consists of \( n \) digits, each of which is \( 8 \). Prove that \( A + 2B + 4 \) is a perfect square.
+
+\subsection{AIME (2000)} 
+The system of equations
+\begin{align*}
+\log_{10}(2000xy) - \log_{10}\left(x\right)\log_{10}\left(y\right) &= 4, \\
+\log_{10}(2yz) - \log_{10}\left(y\right)\log_{10}\left(z\right) &= 1, \\
+\log_{10}(zx) - \log_{10}\left(z\right)\log_{10}\left(x\right) &= 0,
+\end{align*}
+has two solutions \( (x_{1},y_{1},z_{1}) \) and \( (x_{2},y_{2},z_{2}) \). Find \( y_{1} + y_{2} \).
+
+\problem[Problem (Wu-Riddles)]
+Let \( n \in \mathbb{N}_{>0} \) and \( A, B \in \mathbb{R}^{n \times n} \) be real matrices. Now suppose \( I_n - BA \) is invertible, where \( I_n \) is the identity matrix. Prove that \( I_n - AB \) is also invertible.
+
+\problem[Problem (unknown)]
+An enemy submarine is hidden somewhere along the infinite line $\mathbb{R}$. It travels silently, and you know that its path is described by a fixed rational polynomial rule \(\sum_{i=0}^{n}c_iT^{i}\in\mathbb{Q}[X]\); for each time \(t \in \mathbb{N}\), its position is given by
+\[
+x(t) = \sum_{i=0}^{n} c_i t^{i}\in\mathbb{Q}.
+\]
+However, you do not know \(n \in \mathbb{N}\), nor the rational coefficients \((c_i)_{i \in n} \in \mathbb{Q}^n\) that form this rational polynomial rule.
+\\\\
+Each unit of time (starting from \(0\)), you are allowed to launch a single torpedo at any chosen rational position. If the submarine is at that position at that time, it is struck and sinks. Assume you possess a potentially countably infinite arsenal of torpedoes and potentially countably infinite time.
+\\\\
+Devise a strategy — a sequence of torpedo launches — such that, regardless of the submarine's unknown position, you will \textbf{eventually} hit it.
+
+\problem[Problem B1 (Putnam 1960) \& A1 (Putnam 1961)]
+Define 
+\[
+A := \left\{(x,y)\in\mathbb{R}_{\geq 0}\times\mathbb{R}_{\geq 0} \,:\, x^y = y^x\right\}\footnote{Recall that the exponentiation $a^b:=\exp(b \cdot \log(a))$ where $a > 0$ and $b \in \mathbb{R}$ can be extended to $a = 0$ and $b \geq 0$ by:
+    \[
+    0^b = \begin{cases}
+        0 & (b > 0), \\
+        1 & (b = 0).
+    \end{cases}
+    \]
+and extended in the obvious way for $a \in \mathbb{R}^{\times}$ with $b \in \mathbb{Z}$.}
+\]
+and find:
+\[
+A,\quad A\cap\left(\mathbb{Q}\times\mathbb{Q}\right)\quad \text{and} \quad A\cap\left(\mathbb{Z}\times\mathbb{Z}\right).
+\]
+\textbf{Bonus:}  
+Find \( A \cap \left( \mathbb{Q}^{\mathrm{alg}} \times \mathbb{Q}^{\mathrm{alg}} \right) \) and \( A \cap \left( \mathcal{O}_{\mathbb{Q}^{\mathrm{alg}}}(\mathbb{Z}) \times \mathcal{O}_{\mathbb{Q}^{\mathrm{alg}}}(\mathbb{Z}) \right) \).
+
+
+\problem[Problem (Sudakov \& Milojević)]
+Let \(\left( a_n \right)_{n \in \mathbb{N}}, \left( b_n \right)_{n \in \mathbb{N}} \in \mathbb{Q}^{\mathbb{N}}\) be non-constant sequences of rational numbers. Suppose that for all \( i, j \in \mathbb{N} \),
+\[
+\left( a_i - a_j \right)\left( b_i - b_j \right) \in \mathbb{Z}.
+\]
+Prove that there exists a non-zero rational number \( \gamma \in \mathbb{Q}^{\times} \) such that for all \( i, j \in \mathbb{N} \),
+\[
+\gamma\left( a_i - a_j \right), \quad \gamma^{-1}\left( b_i - b_j \right) \in \mathbb{Z}.
+\]
+\end{document}
