@@ -1,0 +1,269 @@
+\documentclass[11pt, a4paper, oneside]{article}
+
+% ===== Page Layout =====
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{microtype}  % Improved text justification
+
+% ===== Fonts & Encoding =====
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+
+% ===== Math Packages =====
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{tensor}
+\usepackage{mathtools}
+
+% ===== Graphics & Diagrams =====
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{pst-node}
+
+% ===== Bibliography =====
+\usepackage{biblatex}
+%\addbibresource{references.bib}  % Uncomment and add your .bib file
+
+% ===== Tables =====
+\usepackage{makecell}
+
+% ===== Colors =====
+\usepackage{xcolor}
+\definecolor{linkcolour}{rgb}{0.5,0,0}  % Dark red color for links
+
+% ===== Hyperlinks =====
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    breaklinks,
+    urlcolor=linkcolour, 
+    linkcolor=linkcolour,
+    citecolor=linkcolour
+}
+
+% ===== Custom Commands =====
+\newcommand{\problem}[1][]{\section{#1} \hfill \par}
+\newcommand{\solution}[1][]{\subsection*{#1}\hfill \par}
+
+% ===== Theorem Environments =====
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{lemma}
+\newtheorem*{lemma}{Lemma}
+
+% ===== Text Highlighting =====
+\usepackage{soul}
+\newcommand\ba[1]{\setbox0=\hbox{$#1$}%
+\rlap{\raisebox{.45\ht0}{\textcolor{linkcolour}{\rule{\wd0}{1pt}}}}#1} 
+\def\bc#1{\textcolor{linkcolour}{BC note: {#1}}}
+\def\b#1{\textcolor{linkcolour}{{#1}}}
+
+% ===== Comment Environment =====
+\usepackage{comment}
+\begin{comment}
+Useful LaTeX fonts:
+\usepackage{mathptmx}
+\usepackage{txfonts}
+\usepackage{pxfonts}
+\usepackage{mathpazo}
+\usepackage{mathpple}
+\usepackage{kmath,kerkis}
+\usepackage{kurier}
+\usepackage{arev}
+\usepackage{euler}
+\usepackage{eulervm}
+\end{comment}
+
+\title{Problem Set Week 1 Solutions}
+\author{ETHZ Math Olympiad Club}
+\date{24 February 2025}
+\begin{document}
+\maketitle
+
+\problem[Problem 1 (First IMO 1956)]
+Prove that the fraction \(\frac{21n+4}{14n+3}\) is irreducible for every natural number \(n\).
+
+\solution[Solution:]
+By Bezout's Lemma, $3 \cdot (14n+3) - 2 \cdot (21n + 4) = 1$, so the GCD of the numerator and denominator is $1$ and the fraction is irreducible.
+\newpage
+\problem[Problem 5 (Russian Math Olympiad 1961)]
+a) Given a 4-tuple of positive numbers \((a,b,c,d)\), it is transformed into a new one according to the rule:
+    \[
+    a' = ab, \quad b' = bc, \quad c' = cd, \quad d' = da.
+    \]
+    The second 4-tuple is transformed into the third according to the same rule, and so on.
+\\\\
+Prove that if at least one initial number does not equal 1, then you can never obtain the initial 4-tuple again.
+\\\\
+b) Given a \(2^k\)-tuple of numbers (where \(k\) is a nonnegative integer), each equal either to 1 or to -1, the tuple is transformed according to the same rule as in part (a): each number is multiplied by the next one, and the last is multiplied by the first.
+\\\\
+Prove that you will always eventually obtain a tuple consisting entirely of 1s.
+
+\solution[Solution:]
+\begin{enumerate}
+    \item[(a)] Let \( Q_0 = (a, b, c, d) \) be the original 4-tuple and let \( Q_n \) be the 4-tuple after \( n \) transformations. We consider the product of all elements:
+    \[
+    abcd.
+    \]
+    If \( abcd > 1 \), then at each step, the product of the transformed values is strictly increasing, making a return to the initial 4-tuple impossible. Similarly, if \( abcd < 1 \), the product is strictly decreasing, again preventing a return. Therefore, the only possibility for a return is if \( abcd = 1 \).
+
+    Next, define \( M(Q) \) as the largest number in the 4-tuple \( Q \). If at least one number in \( Q_1 \) is not \( 1 \), then necessarily \( M(Q_1) > 1 \). Moreover, in \( Q_3 \), each element is the square of some element from \( Q_1 \) (use $abcd=1$), implying:
+    \[
+    M(Q_3) = M(Q_1)^2.
+    \]
+    Since squaring a number greater than 1 results in an even larger number, the sequence \( M(Q_1), M(Q_3), M(Q_5), \dots \) grows indefinitely. This precludes any possibility of returning to the original 4-tuple, as a return would imply cycling, contradicting the unbounded growth of \( M(Q_n) \).
+
+    \item[(b)] After \( r \) transformations, the first element of the \( n \)-tuple can be written as:
+    \[
+    a_1 \prod_{i=1}^{r} a_{i+1}^{\binom{r}{i}},
+    \]
+    where \( \binom{r}{i} \) is the binomial coefficient. By induction, after \( n = 2^k \) transformations, this simplifies to:
+    \[
+    a_1^2 \prod_{i=1}^{n-1} a_{i+1}^{\binom{n}{i}}.
+    \]
+    It suffices to prove that \( \binom{n}{i} \) is even for all \( 0 < i < n \) when \( n \) is a power of \( 2 \).  
+
+    This follows from the fact that in Pascal's triangle, the binomial coefficient \( \binom{n}{i} \) is given by:
+    \[
+    \binom{n}{i} = \frac{n!}{i!(n-i)!}.
+    \]
+    Since \( n = 2^k \), the highest power of \( 2 \) dividing \( n \) is greater than the highest power of \( 2 \) dividing \( i \) or \( n-i \), ensuring that \( \binom{n}{i} \) is always even for \( 0 < i < n \). Thus, all elements in the sequence eventually become \( 1 \), completing the proof.
+\end{enumerate}
+    
+\problem[Problem A-3 (Putnam 1989)]
+Prove that if the complex number \( z \) satisfies the equation
+
+\[
+11z^{10} + 10i z^9 + 10i z -11 = 0,
+\]
+
+then \( |z| = 1 \). (Here, \( i \) is the imaginary unit satisfying \( i^2 = -1 \).)
+
+\solution[Solution:]
+
+We begin by expressing $z^9$ in terms of $z$:
+\begin{equation*}
+    z^9 = \frac{11 - 10iz}{11z + 10i}.
+\end{equation*}
+Taking the modulus on both sides, we examine the numerator and denominator separately:
+\begin{align*}
+    |11 - 10iz|^2 &= (11 - 10iz)(11 + 10iz) = 121 + 100|z|^2 + 220 \Im z, \\
+    |11z + 10i|^2 &= (11z + 10i)(11\bar{z} - 10i) = 100 + 121|z|^2 + 220 \Im z.
+\end{align*}
+If we define $|z^9| = N/D$ where
+\begin{equation*}
+    N = 121 + 100|z|^2 + 220 \Im z, \quad D = 100 + 121|z|^2 + 220 \Im z,
+\end{equation*}
+then their difference is given by
+\begin{equation*}
+    N - D = 21(1 - |z|^2).
+\end{equation*}
+
+Now, consider the cases:
+\\\\
+- If $|z| > 1$, then $1 - |z|^2 < 0$, so $N < D$ and hence $|z^9| < 1$.
+\\\\
+- If $|z| < 1$, then $1 - |z|^2 > 0$, so $N > D$ and hence $|z^9| > 1$.
+
+Both cases is a contradiction. Thus, we conclude that $|z| = 1$ for all roots $z$.
+
+\newpage
+\problem[Problem 4 (IMC 1994)]
+Let \( \alpha \in \mathbb{R} \setminus \{0\} \) and suppose that \( F \) and \( G \) are linear maps (operators) from \( \mathbb{R}^n \) into \( \mathbb{R}^n \) satisfying 
+\[
+F \circ G - G \circ F = \alpha F.
+\]
+
+a) Show that for all \( k \in \mathbb{N} \) one has 
+\[
+F^k \circ G - G \circ F^k = \alpha k F^k.
+\]
+
+b) Show that there exists \( k \geq 1 \) such that \( F^k = 0 \).
+\solution[Solution:]
+\begin{enumerate}
+    \item[(a)] We prove the result by induction on $k$. The base case $k = 1$ is given by the assumption. Assume that the formula holds for some $k \geq 1$, i.e.,
+    \[
+    F^k \circ G - G \circ F^k = \alpha k F^k.
+    \]
+    We compute:
+    \begin{align*}
+        F^{k+1} \circ G - G \circ F^{k+1} 
+        &= F^k \circ(F \circ G) - G \circ F^k \circ F \\
+        &= F^k \circ(G \circ F + \alpha F) - G \circ F^k\circ F \\
+        &= F^k\circ G \circ F + \alpha F^{k+1} - G \circ F^{k}\circ F \\
+        &= (F^k \circ G - G\circ F^k) \circ F + \alpha F^{k+1} \\
+        &= (\alpha k F^k) \circ F + \alpha F^{k+1} \\
+        &= \alpha k F^{k+1} + \alpha F^{k+1} \\
+        &= \alpha (k+1) F^{k+1}.
+    \end{align*}
+    This completes the induction step, proving the result.
+
+    \item[(b)] Consider the linear operator $L$ defined on the space of $n \times n$ matrices by
+    \[
+    L(F) = F \circ G - G \circ F.
+    \]
+    By the given assumption, we have $L(F) = \alpha F$. Also using part (a), we obtain
+    \[
+    L(F^k) = \alpha k F^k.
+    \]
+    The operator $L$ acts on an $n^2$-dimensional space and can have at most $n^2$ distinct eigenvalues. However, if $F^k \neq 0$ for all $k$, then $L$ has infinitely many eigenvalues $\alpha k$, which contradicts the fact that the space is finite-dimensional. Hence, there must exist some $k \geq 1$ such that $F^k = 0$.
+\end{enumerate}
+\newpage
+\problem[Problem A-6 (Putnam 1989)]
+
+Let 
+\[
+\alpha(X) = 1 + a_1 X + a_2 X^2 + \cdots \in \mathbb{F}_2[[X]]
+\]
+be a formal power series with coefficients in the field of two elements. Define the coefficients \( a_n \) as follows:
+
+\[
+a_n =
+\begin{cases} 
+1, & \text{if every block of zeros in the binary expansion of } n \text{ has an even number of zeros} \\
+0, & \text{otherwise}.
+\end{cases}
+\]
+
+For example, \( a_{36} = 1 \) because \( 36 = 100100_2 \), and \( a_{20} = 0 \) because \( 20 = 10100_2 \). 
+
+Prove that the power series satisfies the equation:
+
+\[
+\alpha(X)^3 + X \alpha(X) + 1 = 0.
+\]
+
+\solution[Solution:]
+We begin by analyzing the properties of the coefficients \( a_n \). Since the field has characteristic 2, we have \( \alpha(X)^2 = 1 + \sum a_n X^{2n} \). This is because squaring a power series in characteristic 2 eliminates the cross terms, and \( a_n^2 = a_n \) (as \( a_n \in \{0, 1\} \)).
+\\\\
+Next, consider \( \alpha(X)^3 \). Multiplying the given equation \( \alpha(X)^3 + X \alpha(X) + 1 = 0 \) by \( \alpha(X) \), we obtain:
+\[
+\alpha(X)^4 + X \alpha(X)^2 + \alpha(X) = 0.
+\]
+We now analyze \( \alpha(X)^4 + X \alpha(X)^2 + \alpha(X) \) by examining the coefficients of \( X^{4n} \), \( X^{4n+2} \), and \( X^{2n+1} \).
+\begin{itemize}
+    \item \textbf{Coefficient of \( X^{4n} \):} The coefficient is \( a_n + a_{4n} \). Since the binary expansion of \( 4n \) is the binary expansion of \( n \) with two zeros appended at the end, \( a_{4n} = a_n \). Thus, \( a_n + a_{4n} = 0 \) in characteristic 2. For \( n = 0 \), the coefficient is \( 1 + 1 = 0 \).
+    
+    \item \textbf{Coefficient of \( X^{4n+2} \):} The coefficient is \( a_{4n+2} \). The binary expansion of \( 4n+2 \) ends with \( \dots 10 \), so \( a_{4n+2} = 0 \).
+
+    \item \textbf{Coefficient of \( X^{2n+1} \):} The coefficient is \( a_{2n+1} + a_n \). The binary expansion of \( 2n+1 \) is the binary expansion of \( n \) with an extra 1 appended at the end. Thus, \( a_{2n+1} = a_n \), and \( a_{2n+1} + a_n = 0 \).
+\end{itemize}
+Since all coefficients of \( \alpha(X)^4 + X \alpha(X)^2 + \alpha(X) \) are zero, we have:
+\[
+\alpha(X)^4 + X \alpha(X)^2 + \alpha(X) = 0.
+\]
+Since \( \alpha(X) \neq 0 \) and $\mathbb{F}_{2}[[X]]$ is a domain as $\mathbb{F}_{2}$ is a domain, we must obtain:
+\[
+\alpha(X)^3 + X \alpha(X) + 1 = 0,
+\]
+as required.
+
+\end{document}
