@@ -1,9 +1,33 @@
 {% extends "base.html" %}
 
+
+{% macro render_tree(tree, parent_path='', collapse_id='root') %}
+    <ul class="list-group">
+    {% for item in tree %}
+        {% if item.type == 'folder' %}
+            {% set this_id = collapse_id ~ '-' ~ loop.index %}
+            <li class="list-group-item">
+                <a data-bs-toggle="collapse" href="#{{ this_id }}" role="button" aria-expanded="false" aria-controls="{{ this_id }}">
+                    <i class="fas fa-folder"></i> {{ item.name }}
+                </a>
+                <div class="collapse ms-3" id="{{ this_id }}">
+                    {{ render_tree(item.children, parent_path ~ item.name ~ '/', this_id) }}
+                </div>
+            </li>
+        {% else %}
+            <li class="list-group-item">
+                <a href="{{ url_for('static', filename='uploads/problems/' ~ item.path) }}" target="_blank">
+                    <i class="fas fa-file"></i> {{ item.name }}
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endmacro %}
+
 {% block content %}
 <div class="container mt-5">
     <h1>ETHZ Math Olympiad Problems</h1>
-    
     <div class="row mt-4">
         <div class="col-md-12">
             <div class="card">
@@ -11,15 +35,7 @@
                     <h2>Problem Sets</h2>
                 </div>
                 <div class="card-body">
-                    <ul class="list-group">
-                    {% for problem in problems %}
-                        <li class="list-group-item">
-                            <a href="{{ url_for('static', filename='uploads/problems/' + problem) }}" target="_blank">
-                                {{ problem }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                    </ul>
+                    {{ render_tree(problems_tree) }}
                 </div>
             </div>
         </div>

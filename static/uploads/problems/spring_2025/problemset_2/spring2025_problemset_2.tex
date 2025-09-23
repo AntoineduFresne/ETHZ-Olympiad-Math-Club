@@ -1,0 +1,115 @@
+\documentclass[11pt, a4paper, oneside]{article}
+
+% ===== Page Layout =====
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{microtype}  % Improved text justification
+
+% ===== Fonts & Encoding =====
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+
+% ===== Math Packages =====
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{tensor}
+\usepackage{mathtools}
+
+% ===== Graphics & Diagrams =====
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{pst-node}
+
+% ===== Bibliography =====
+\usepackage{biblatex}
+%\addbibresource{references.bib}  % Uncomment and add your .bib file
+
+% ===== Tables =====
+\usepackage{makecell}
+
+% ===== Colors =====
+\usepackage{xcolor}
+\definecolor{linkcolour}{rgb}{0.5,0,0}  % Dark red color for links
+
+% ===== Hyperlinks =====
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    breaklinks,
+    urlcolor=linkcolour, 
+    linkcolor=linkcolour,
+    citecolor=linkcolour
+}
+
+% ===== Custom Commands =====
+\newcommand{\problem}[1][]{\section{#1} \hfill \par}
+\newcommand{\answer}{\subsection*{Answer:}\hfill \par}
+
+% ===== Theorem Environments =====
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+% ===== Text Highlighting =====
+\usepackage{soul}
+\newcommand\ba[1]{\setbox0=\hbox{$#1$}%
+\rlap{\raisebox{.45\ht0}{\textcolor{linkcolour}{\rule{\wd0}{1pt}}}}#1} 
+\def\bc#1{\textcolor{linkcolour}{BC note: {#1}}}
+\def\b#1{\textcolor{linkcolour}{{#1}}}
+
+% ===== Comment Environment =====
+\usepackage{comment}
+\begin{comment}
+Useful LaTeX fonts:
+\usepackage{mathptmx}
+\usepackage{txfonts}
+\usepackage{pxfonts}
+\usepackage{mathpazo}
+\usepackage{mathpple}
+\usepackage{kmath,kerkis}
+\usepackage{kurier}
+\usepackage{arev}
+\usepackage{euler}
+\usepackage{eulervm}
+\end{comment}
+
+\title{Problem Set Week 2}
+\author{ETHZ Math Olympiad Club}
+\date{3 March 2025}
+\begin{document}
+\maketitle
+\problem[Problem 1 (Pan African 2018)]
+Find all functions $f : \mathbb Z \to \mathbb Z$ such that $$(f(x + y))^2 = f(x^2) + f(y^2)$$ for all $x, y \in \mathbb Z$.
+
+\problem[Problem B-2 (IMC 2012)]
+Define the sequence \( a_0, a_1, \dots \) inductively by \( a_0 = 1 \), \( a_1 = \frac{1}{2} \) and
+\[
+a_{n+1} = \frac{n a_n^2}{1 + (n+1)a_n} \quad \text{for } n \geq 1.
+\]
+Show that the series 
+\[
+\sum_{k=0}^{\infty} \frac{a_{k+1}}{a_k}
+\]
+converges and determine its value.
+
+\problem[Problem 5 (Pan African 2018)]
+Let $a$, $b$, $c$ and $d$ be non-zero pairwise different real numbers such that
+$$
+  \frac{a}{b} + \frac{b}{c} + \frac{c}{d} + \frac{d}{a} = 4 \text{ and } ac = bd.
+$$
+Show that
+$$
+  \frac{a}{c} + \frac{b}{d} + \frac{c}{a} + \frac{d}{b} \leq -12
+$$and that $-12$ is the maximum.
+
+\problem[Problem 3 (Silk Road 2019)]
+Find all pairs $ (a, n) $ of positive natural numbers such that $ \varphi (a ^ n + n) = 2 ^ n. $
+($ \varphi (n) $ is the Euler function, that is, the number of integers from $1$ up to $ n $, relatively prime to $ n $)
+
+\end{document}

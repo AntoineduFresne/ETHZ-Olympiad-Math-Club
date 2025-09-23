@@ -1,0 +1,123 @@
+\documentclass[11pt, a4paper, oneside]{article}
+
+% ===== Page Layout =====
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{microtype}  % Improved text justification
+
+% ===== Fonts & Encoding =====
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+
+% ===== Math Packages =====
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{tensor}
+\usepackage{mathtools}
+
+% ===== Graphics & Diagrams =====
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{pst-node}
+
+% ===== Bibliography =====
+\usepackage{biblatex}
+%\addbibresource{references.bib}  % Uncomment and add your .bib file
+
+% ===== Tables =====
+\usepackage{makecell}
+
+% ===== Colors =====
+\usepackage{xcolor}
+\definecolor{linkcolour}{rgb}{0.5,0,0}  % Dark red color for links
+
+% ===== Hyperlinks =====
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    breaklinks,
+    urlcolor=linkcolour, 
+    linkcolor=linkcolour,
+    citecolor=linkcolour
+}
+
+% ===== Custom Commands =====
+\newcommand{\problem}[1][]{\section{#1} \hfill \par}
+\newcommand{\solution}[1][]{\subsection*{#1}\hfill \par}
+
+% ===== Theorem Environments =====
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{lemma}
+\newtheorem*{lemma}{Lemma}
+
+% ===== Text Highlighting =====
+\usepackage{soul}
+\newcommand\ba[1]{\setbox0=\hbox{$#1$}%
+\rlap{\raisebox{.45\ht0}{\textcolor{linkcolour}{\rule{\wd0}{1pt}}}}#1} 
+\def\bc#1{\textcolor{linkcolour}{BC note: {#1}}}
+\def\b#1{\textcolor{linkcolour}{{#1}}}
+
+% ===== Comment Environment =====
+\usepackage{comment}
+\begin{comment}
+Useful LaTeX fonts:
+\usepackage{mathptmx}
+\usepackage{txfonts}
+\usepackage{pxfonts}
+\usepackage{mathpazo}
+\usepackage{mathpple}
+\usepackage{kmath,kerkis}
+\usepackage{kurier}
+\usepackage{arev}
+\usepackage{euler}
+\usepackage{eulervm}
+\end{comment}
+
+\title{Problem Set Week 9}
+\author{ETHZ Math Olympiad Club}
+\date{28 April 2025}
+\begin{document}
+\maketitle
+\problem[Problem (X-ENS 11 Orals)]
+Let \(\left(G,\cdot,e_G\right)\) be a finite non-commutative group. Show that the probability that two elements \(x,y\in G\) chosen uniformly at random commute is less than or equal to \(\frac{5}{8}\), and show that this bound is tight, i.e., provide an example where the bound is attained.
+
+\problem[Problem (from the book: Selected Problems in Real Analysis)]
+Let \( S \) be a set and \( f: S \rightarrow S \) a bijection. Show that \( f \) can be written as the composition of two involutions, where an involution \( h \) is a function that is its own inverse.
+
+\problem[Problems (Sudakov \& Milojevic)]
+\subsection{}
+Let $C_{1}, C_{2}, C_{3}$ be disjoint circles in the plane of different radii, and let $T_{ij}$ be the intersection point of the common tangent to $C_{i}$ and $C_{j}$ for all $1 \le i < j \le 3$. Show that the points $T_{12}$, $T_{23}$, and $T_{13}$ lie on a common line.
+
+\subsection{}
+Several spherical planets, each of radius $R$, are placed in a greenhouse. On each planet, Mark colors in black the regions that are not visible from any other planet by a single straight-line segment. Prove that the total area of the colored regions, summed over all planets, is exactly $4\pi R^{2}$.
+
+ 
+\subsection{}
+There is a pile of silver coins on a table. John holds two pieces of paper and performs the
+following process: at each step, he can add one gold coin to the table and write the current number of silver
+coins on one piece of paper, or remove one silver coin from the table and write down the current number
+of gold coins on the other piece of paper. This process runs until no more silver coins remain on the table.
+Show that at the end of the process, the sums of the numbers on both pieces of paper are equal.
+
+\problem[Problem (Romanian IMO Team Selection Tests 1998)]
+Show that the polynomial with integer coefficient $(X^2+X)^{2^n}+1\in\mathbb{Z}[X]$ is irreducible over $\mathbb{Q}[X]$.
+
+\problem[Problem B6 (Putnam 1985)]
+Let \( n \geq 1 \) and \( G \leq \mathrm{GL}_n(\mathbb{R}) \) be a finite group consisting of real \( n \times n \) matrices under matrix multiplication. Suppose the sum of the traces of all elements in \( G \) is zero:
+\[
+\sum_{M \in G} \mathrm{tr}(M) = 0.
+\]
+Prove that the sum of the elements of \( G \) is the zero matrix:
+\[
+\sum_{M \in G} M = \mathbf{0}_{n \times n}.
+\]
+
+\end{document}
