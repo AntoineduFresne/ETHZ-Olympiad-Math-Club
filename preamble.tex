@@ -1,0 +1,81 @@
+% ===== Page Layout =====
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{microtype}  % Improved text justification
+
+% ===== Fonts & Encoding =====
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+
+% ===== Math Packages =====
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{tensor}
+\usepackage{mathtools}
+
+% ===== Graphics & Diagrams =====
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{pst-node}
+\usetikzlibrary{trees}
+
+% ===== Bibliography =====
+\usepackage{biblatex}
+\addbibresource{references.bib}  % Uncomment and add your .bib file
+
+% ===== Tables =====
+\usepackage{makecell}
+
+% ===== Colors =====
+\usepackage{xcolor}
+\definecolor{linkcolour}{rgb}{0.5,0,0}  % Dark red color for links
+
+% ===== Hyperlinks =====
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    breaklinks,
+    urlcolor=linkcolour, 
+    linkcolor=linkcolour,
+    citecolor=linkcolour
+}
+
+% ===== Custom Commands =====
+\newcommand{\problem}[1][]{\section*{#1} \hfill \par}
+\newcommand{\solution}[1][]{\subsection*{#1}\hfill \par}
+
+% ===== Theorem Environments =====
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{lemma}
+\newtheorem*{lemma}{Lemma}
+
+% ===== Text Highlighting =====
+\usepackage{soul}
+\newcommand\ba[1]{\setbox0=\hbox{$#1$}%
+\rlap{\raisebox{.45\ht0}{\textcolor{linkcolour}{\rule{\wd0}{1pt}}}}#1} 
+\def\bc#1{\textcolor{linkcolour}{BC note: {#1}}}
+\def\b#1{\textcolor{linkcolour}{{#1}}}
+
+% ===== Comment Environment =====
+\usepackage{comment}
+\begin{comment}
+Useful LaTeX fonts:
+\usepackage{mathptmx}
+\usepackage{txfonts}
+\usepackage{pxfonts}
+\usepackage{mathpazo}
+\usepackage{mathpple}
+\usepackage{kmath,kerkis}
+\usepackage{kurier}
+\usepackage{arev}
+\usepackage{euler}
+\usepackage{eulervm}
+\end{comment}
