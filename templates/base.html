@@ -57,20 +57,30 @@
     <!-- Custom JS -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script>
-    // Theme toggle logic with button text
+    // Theme toggle logic with button text and persistence
     const themeToggle = document.getElementById('theme-toggle');
     const html = document.documentElement;
     function updateToggleText() {
         const currentTheme = html.getAttribute('data-bs-theme');
         themeToggle.textContent = currentTheme === 'light' ? 'Dark' : 'Light';
     }
+    function setTheme(theme) {
+        html.setAttribute('data-bs-theme', theme);
+        updateToggleText();
+        localStorage.setItem('theme', theme);
+    }
     themeToggle.addEventListener('click', function() {
         const currentTheme = html.getAttribute('data-bs-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        html.setAttribute('data-bs-theme', newTheme);
-        updateToggleText();
+        setTheme(newTheme);
     });
-    updateToggleText();
+    // On page load, set theme from localStorage if available
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+        setTheme(savedTheme);
+    } else {
+        setTheme('light');
+    }
     </script>
 </body>
 </html>

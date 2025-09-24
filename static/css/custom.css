@@ -1,3 +1,11 @@
+[data-bs-theme="light"] .footer,
+[data-bs-theme="dark"] .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+}
 /* Light mode styles */
 [data-bs-theme="light"] body,
 [data-bs-theme="light"] .card,
@@ -22,8 +30,8 @@
 [data-bs-theme="dark"] .card-header,
 [data-bs-theme="dark"] .navbar,
 [data-bs-theme="dark"] .footer {
-    background-color: #222;
-    color: #fff;
+    background-color: #222 !important;
+    color: #fff !important;
 }
 [data-bs-theme="dark"] h1,
 [data-bs-theme="dark"] h2,
