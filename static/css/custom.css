@@ -50,9 +50,16 @@
 [data-bs-theme="light"] .card,
 [data-bs-theme="light"] .card-header,
 [data-bs-theme="light"] .navbar,
+
 [data-bs-theme="light"] .footer {
     background-color: #fff;
     color: #222;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+    border-top: 1px solid #eee;
 }
 
 [data-bs-theme="dark"] body {
@@ -71,6 +78,12 @@
 [data-bs-theme="dark"] .card-header,
 [data-bs-theme="dark"] .navbar,
 [data-bs-theme="dark"] .footer {
-    background-color: #222;
-    color: #fff;
+    background-color: #181a1b;
+    color: #f8f9fa;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+    border-top: 1px solid #333;
 }
