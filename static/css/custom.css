@@ -33,81 +33,44 @@
     background-color: #222;
     color: #f8f9fa;
 }
-root {
-    --math-font: 'Fira Math', serif;
-    --text-font: 'Fira Sans', sans-serif;
+
+/* Simple two-mode CSS */
+[data-bs-theme="light"] body {
+    background-color: #fff;
+    color: #222;
+}
+[data-bs-theme="light"] h1,
+[data-bs-theme="light"] h2,
+[data-bs-theme="light"] h3,
+[data-bs-theme="light"] h4,
+[data-bs-theme="light"] h5,
+[data-bs-theme="light"] h6 {
+    color: #222;
+}
+[data-bs-theme="light"] .card,
+[data-bs-theme="light"] .card-header,
+[data-bs-theme="light"] .navbar,
+[data-bs-theme="light"] .footer {
+    background-color: #fff;
+    color: #222;
 }
 
-body {
-    font-family: var(--text-font);
-    line-height: 1.6;
+[data-bs-theme="dark"] body {
+    background-color: #181a1b;
+    color: #fff;
 }
-
-.math {
-    font-family: var(--math-font);
-}
-
-.card {
-    transition: transform 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.navbar-brand {
-    font-weight: bold;
-}
-
-.display-4 {
-    font-weight: 700;
-}
-
-.badge {
-    font-size: 0.8rem;
-    padding: 0.5em 0.7em;
-}
-
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: var(--bs-dark);
-}
-
-/* Dark mode header and card-header fixes */
 [data-bs-theme="dark"] h1,
 [data-bs-theme="dark"] h2,
 [data-bs-theme="dark"] h3,
 [data-bs-theme="dark"] h4,
 [data-bs-theme="dark"] h5,
 [data-bs-theme="dark"] h6 {
-    color: #222 !important;
+    color: #fff;
 }
-[data-bs-theme="dark"] .card-header {
-    color: #fff !important;
-    background-color: #222 !important;
+[data-bs-theme="dark"] .card,
+[data-bs-theme="dark"] .card-header,
+[data-bs-theme="dark"] .navbar,
+[data-bs-theme="dark"] .footer {
+    background-color: #222;
+    color: #fff;
 }
-}
-
-main {
-    margin-bottom: 100px;
-}
-
-.card-title {
-    color: var(--bs-primary);
-}
-
-/* Custom styling for mathematical expressions */
-.katex {
-    font-size: 1.1em;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .display-4 {
-        font-size: 2rem;
-    }
-}
-
-MathMastery - Replit
