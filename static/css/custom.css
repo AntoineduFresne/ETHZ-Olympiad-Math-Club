@@ -1,77 +1,35 @@
 /* Light mode styles */
-[data-bs-theme="light"] body {
-    background-color: #fff;
-    color: #212529;
-}
-[data-bs-theme="light"] h1,
-[data-bs-theme="light"] h2,
-[data-bs-theme="light"] h3,
-[data-bs-theme="light"] h4,
-[data-bs-theme="light"] h5,
-[data-bs-theme="light"] h6 {
-    color: #212529;
-}
-[data-bs-theme="light"] .card-header {
-    background-color: #f8f9fa;
-    color: #0d6efd;
-}
-
-/* Dark mode styles */
-[data-bs-theme="dark"] body {
-    background-color: #181a1b;
-    color: #f8f9fa;
-}
-[data-bs-theme="dark"] h1,
-[data-bs-theme="dark"] h2,
-[data-bs-theme="dark"] h3,
-[data-bs-theme="dark"] h4,
-[data-bs-theme="dark"] h5,
-[data-bs-theme="dark"] h6 {
-    color: #f8f9fa;
-}
-[data-bs-theme="dark"] .card-header {
-    background-color: #222;
-    color: #f8f9fa;
-}
-
-/* Simple two-mode CSS */
-[data-bs-theme="light"] body {
-    background-color: #fff;
-    color: #222;
-}
-[data-bs-theme="light"] h1,
-[data-bs-theme="light"] h2,
-[data-bs-theme="light"] h3,
-[data-bs-theme="light"] h4,
-[data-bs-theme="light"] h5,
-[data-bs-theme="light"] h6 {
-    color: #222;
-}
+[data-bs-theme="light"] body,
 [data-bs-theme="light"] .card,
 [data-bs-theme="light"] .card-header,
 [data-bs-theme="light"] .navbar,
-
 [data-bs-theme="light"] .footer {
     background-color: #fff;
     color: #222;
 }
+[data-bs-theme="light"] h1,
+[data-bs-theme="light"] h2,
+[data-bs-theme="light"] h3,
+[data-bs-theme="light"] h4,
+[data-bs-theme="light"] h5,
+[data-bs-theme="light"] h6 {
+    color: #222;
+}
 
-[data-bs-theme="dark"] body {
-    background-color: #181a1b;
-    color: #fff;
-}
-[data-bs-theme="dark"] h1,
-[data-bs-theme="dark"] h2,
-[data-bs-theme="dark"] h3,
-[data-bs-theme="dark"] h4,
-[data-bs-theme="dark"] h5,
-[data-bs-theme="dark"] h6 {
-    color: #fff;
-}
+/* Dark mode styles */
+[data-bs-theme="dark"] body,
 [data-bs-theme="dark"] .card,
 [data-bs-theme="dark"] .card-header,
 [data-bs-theme="dark"] .navbar,
 [data-bs-theme="dark"] .footer {
     background-color: #222;
+    color: #fff;
+}
+[data-bs-theme="dark"] h1,
+[data-bs-theme="dark"] h2,
+[data-bs-theme="dark"] h3,
+[data-bs-theme="dark"] h4,
+[data-bs-theme="dark"] h5,
+[data-bs-theme="dark"] h6 {
     color: #fff;
 }
