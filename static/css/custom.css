@@ -40,6 +40,21 @@ footer {
     background-color: var(--bs-dark);
 }
 
+/* Dark mode header and card-header fixes */
+[data-bs-theme="dark"] h1,
+[data-bs-theme="dark"] h2,
+[data-bs-theme="dark"] h3,
+[data-bs-theme="dark"] h4,
+[data-bs-theme="dark"] h5,
+[data-bs-theme="dark"] h6 {
+    color: #fff !important;
+}
+[data-bs-theme="dark"] .card-header {
+    color: #fff !important;
+    background-color: #222 !important;
+}
+}
+
 main {
     margin-bottom: 100px;
 }
