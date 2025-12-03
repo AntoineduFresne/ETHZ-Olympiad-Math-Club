@@ -1,1 +1,1 @@
-# ETHZ-Olympiad-Math-Club
+# Olympiad Math Club at ETHZ
